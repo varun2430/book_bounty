@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:book_bounty/models/book.dart';
 
 class BookCard extends StatelessWidget {
+  final Book book;
   final VoidCallback press;
 
   const BookCard({
     super.key,
+    required this.book,
     required this.press,
   });
 
@@ -19,23 +22,23 @@ class BookCard extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.all(10),
               width: double.infinity,
-              // height: double.infinity,
               decoration: BoxDecoration(
                 color: Colors.grey[300],
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Image.asset(
-                "assets/images/book_img_placeholder.jpg",
-                height: 180,
+                book.coverImage,
               ),
             ),
           ),
           Padding(
             padding: EdgeInsets.all(5),
             child: Text(
-              "The Lord of the Rings",
+              book.title,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 14,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -43,7 +46,9 @@ class BookCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 5),
             child: Text(
-              "Mumbai, Maharashtra",
+              book.location,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
               style: TextStyle(
                 fontSize: 10,
               ),

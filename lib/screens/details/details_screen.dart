@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:book_bounty/screens/details/components/body.dart';
+import 'package:book_bounty/models/book.dart';
 
 class DetailsScreen extends StatelessWidget {
-  const DetailsScreen({super.key});
+  final Book book;
+  const DetailsScreen({super.key, required this.book});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: buildAppBar(context),
-      body: Body(),
+      body: Body(book: book),
     );
   }
 

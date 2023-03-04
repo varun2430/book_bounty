@@ -1,29 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:book_bounty/models/book.dart';
 
 class BookTitleWithImage extends StatelessWidget {
+  final String title;
+  final List<String> authors;
+  final String coverImage;
+
   const BookTitleWithImage({
     super.key,
-    required this.size,
+    required this.title,
+    required this.authors,
+    required this.coverImage,
   });
-
-  final Size size;
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "The Lord of the Rings",
+            title,
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
             ),
           ),
           Text(
-            "J. R. R. Tolkien",
+            authors[0],
             style: TextStyle(
               fontSize: 16,
             ),
@@ -35,7 +41,7 @@ class BookTitleWithImage extends StatelessWidget {
             children: [
               Expanded(
                 child: Image.asset(
-                  "assets/images/book_img_placeholder.jpg",
+                  coverImage,
                   height: size.height * 0.28,
                 ),
               ),

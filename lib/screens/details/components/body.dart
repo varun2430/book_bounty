@@ -3,11 +3,11 @@ import 'package:book_bounty/screens/details/components/book_title_with_image.dar
 import 'package:book_bounty/screens/details/components/location_and_condition.dart';
 import 'package:book_bounty/screens/details/components/description.dart';
 import 'package:book_bounty/screens/details/components/know_more_and_apply.dart';
+import 'package:book_bounty/models/book.dart';
 
 class Body extends StatelessWidget {
-  const Body({super.key});
-  final book_desc =
-      "The Lord of the Rings is an epic high-fantasy novel by English author and scholar J. R. R. Tolkien. Set in Middle-earth, the story began as a sequel to Tolkien's 1937 children's book The Hobbit, but eventually developed into a much larger work. Written in stages between 1937 and 1949, The Lord of the Rings is one of the best-selling books ever written, with over 150 million copies sold.\nThe title refers to the story's main antagonist, the Dark Lord Sauron, who, in an earlier age, created the One Ring to rule the other Rings of Power given to Men, Dwarves, and Elves, in his campaign to conquer all of Middle-earth. From homely beginnings in the Shire, a hobbit land reminiscent of the English countryside, the story ranges across Middle-earth, following the quest to destroy the One Ring, seen mainly through the eyes of the hobbits Frodo, Sam, Merry and Pippin.";
+  final Book book;
+  const Body({super.key, required this.book});
 
   @override
   Widget build(BuildContext context) {
@@ -35,13 +35,18 @@ class Body extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-                      LocationAndCondition(),
-                      Description(book_desc: book_desc),
+                      LocationAndCondition(
+                          location: book.location, condition: book.condition),
+                      Description(book_desc: book.description),
                       KnowMoreAndApply(),
                     ],
                   ),
                 ),
-                BookTitleWithImage(size: size)
+                BookTitleWithImage(
+                  title: book.title,
+                  authors: book.authors,
+                  coverImage: book.coverImage,
+                )
               ],
             ),
           ),
@@ -50,5 +55,3 @@ class Body extends StatelessWidget {
     );
   }
 }
-
-

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
 class LocationAndCondition extends StatelessWidget {
+  final String location;
+  final String condition;
   const LocationAndCondition({
     super.key,
+    required this.location,
+    required this.condition,
   });
 
   @override
@@ -21,7 +25,7 @@ class LocationAndCondition extends StatelessWidget {
                 ),
               ),
               Text(
-                "Mumbai, Maharashtra",
+                location,
                 style: TextStyle(
                   fontSize: 14,
                 ),
@@ -41,7 +45,7 @@ class LocationAndCondition extends StatelessWidget {
                 ),
               ),
               Text(
-                "Good",
+                condition,
                 style: TextStyle(
                   fontSize: 14,
                 ),
