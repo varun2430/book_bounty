@@ -16,26 +16,27 @@ class Body extends StatelessWidget {
       children: [
         Categories(),
         Expanded(
-            child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: GridView.builder(
-            itemCount: books.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 0.80,
-              mainAxisSpacing: 15,
-              crossAxisSpacing: 15,
-            ),
-            itemBuilder: (context, index) => BookCard(
-              book: books[index],
-              press: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DetailsScreen(book: books[index]),
-                  )),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: GridView.builder(
+              itemCount: books.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 0.80,
+                mainAxisSpacing: 15,
+                crossAxisSpacing: 15,
+              ),
+              itemBuilder: (context, index) => BookCard(
+                book: books[index],
+                press: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DetailsScreen(book: books[index]),
+                    )),
+              ),
             ),
           ),
-        )),
+        ),
       ],
     );
   }

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1023206670281",
+    "project_id": "book-bounty",
+    "storage_bucket": "book-bounty.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1023206670281:android:7df50092a4933b86f9b218",
+        "android_client_info": {
+          "package_name": "com.example.book_bounty"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1023206670281-4d9i55m03nj8jnmdeovll8r03842bg3v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRYyY-j-RyNQkLdP3jmGglleC0mTPr2GY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1023206670281-4d9i55m03nj8jnmdeovll8r03842bg3v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

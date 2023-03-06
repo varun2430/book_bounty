@@ -23,15 +23,18 @@ class BookTitleWithImage extends StatelessWidget {
         children: [
           Text(
             title,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
             style: TextStyle(
-              fontSize: 24,
+              fontSize: 22,
               fontWeight: FontWeight.bold,
             ),
           ),
           Text(
             authors[0],
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
             ),
           ),
           SizedBox(

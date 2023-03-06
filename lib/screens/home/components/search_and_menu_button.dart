@@ -27,22 +27,22 @@ class SearchAndMenuButton extends StatelessWidget {
             ),
           ),
         ),
-        InkWell(
-          onTap: () {},
-          borderRadius: BorderRadius.circular(50),
-          child: Container(
-            width: 45,
-            height: 45,
-            decoration: BoxDecoration(
-              color: Colors.transparent,
-              shape: BoxShape.circle,
-            ),
-            child: Icon(
-              Icons.menu,
-              color: Colors.black,
-            ),
-          ),
-        ),
+        // InkWell(
+        //   onTap: () {},
+        //   borderRadius: BorderRadius.circular(50),
+        //   child: Container(
+        //     width: 45,
+        //     height: 45,
+        //     decoration: BoxDecoration(
+        //       color: Colors.transparent,
+        //       shape: BoxShape.circle,
+        //     ),
+        //     child: Icon(
+        //       Icons.menu,
+        //       color: Colors.black,
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }

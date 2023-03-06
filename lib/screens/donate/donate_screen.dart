@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:book_bounty/screens/donate/components/body.dart';
 
 class DonateScreen extends StatelessWidget {
   const DonateScreen
@@ -8,6 +9,7 @@ class DonateScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(context),
+      body: Body(),
     );
   }
 
