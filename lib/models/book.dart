@@ -76,15 +76,6 @@ List<Book> books = [
       ["fiction"],
       "assets/images/got_ci.jpg"),
   Book(
-      "Mein Kampf",
-      ["Adolf Hitler"],
-      "tmp_isbn",
-      "Mumbai, Maharashtra",
-      "Good",
-      "Mein Kampf (German: [mein kampf]; lit. My Struggle') is a 1925 autobiographical manifesto by Nazi Party leader Adolf Hitler. The work describes the process by which Hitler became antisemitic and outlines his political ideology and future plans for Germany. Volume 1 of Mein Kampf was published in 1925 and Volume 2 in 1926 The book was edited first by Emil Maurice, then by Hitler's deputy Rudolf Hess. \nHitler began Mein Kampf while imprisoned following his failed coup in Munich in November 1923 and a trial in February 1924 for high treason, in which he received a sentence of five years. Although he received many visitors initially, he soon devoted himself entirely to the book. As he continued, he realized that it would have to be a two-volume work, with the first volume scheduled for release in early 1925. The governor of Landsberg noted at the time that he [Hitler] hopes the book will run into many editions, thus enabling him to fulfill his financial obligations and to defray the expenses incurred at the time of his trial. After slow initial sales, the book became a bestseller in Germany following Hitlers rise to power in 1933.",
-      ["biography"],
-      "assets/images/mf_ci.webp"),
-  Book(
       "Harry Potter and the Deathly Hallows",
       ["J. K. Rowling"],
       "tmp_isbn",
@@ -93,4 +84,13 @@ List<Book> books = [
       "Harry Potter and the Deathly Hallows is a fantasy novel written by British author J. K. Rowling and the seventh and final novel of the main Harry Potter series. It was released on 21 July 2007 in the United Kingdom by Bloomsbury Publishing, in the United States by Scholastic, and in Canada by Raincoast Books. The novel chronicles the events directly following Harry Potter and the Half-Blood Prince (2005) and the final confrontation between the wizards Harry Potter and Lord Voldemort.",
       ["fiction"],
       "assets/images/hp2_ci.jpg"),
+  Book(
+      "Mein Kampf",
+      ["Adolf Hitler"],
+      "tmp_isbn",
+      "Mumbai, Maharashtra",
+      "Good",
+      "Mein Kampf (German: [mein kampf]; lit. My Struggle') is a 1925 autobiographical manifesto by Nazi Party leader Adolf Hitler. The work describes the process by which Hitler became antisemitic and outlines his political ideology and future plans for Germany. Volume 1 of Mein Kampf was published in 1925 and Volume 2 in 1926 The book was edited first by Emil Maurice, then by Hitler's deputy Rudolf Hess. \nHitler began Mein Kampf while imprisoned following his failed coup in Munich in November 1923 and a trial in February 1924 for high treason, in which he received a sentence of five years. Although he received many visitors initially, he soon devoted himself entirely to the book. As he continued, he realized that it would have to be a two-volume work, with the first volume scheduled for release in early 1925. The governor of Landsberg noted at the time that he [Hitler] hopes the book will run into many editions, thus enabling him to fulfill his financial obligations and to defray the expenses incurred at the time of his trial. After slow initial sales, the book became a bestseller in Germany following Hitlers rise to power in 1933.",
+      ["biography"],
+      "assets/images/mf_ci.webp"),
 ];

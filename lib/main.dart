@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:book_bounty/screens/login/login_screen.dart';
+import 'package:book_bounty/utils.dart';
+import 'package:book_bounty/screens/login/auth_screen.dart';
 import 'package:book_bounty/screens/home/home_screen.dart';
 
 Future main() async {
@@ -11,12 +12,16 @@ Future main() async {
   runApp(const MyApp());
 }
 
+final navigatorKey = GlobalKey<NavigatorState>();
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        scaffoldMessengerKey: Utils.messengerKey,
+        navigatorKey: navigatorKey,
         title: 'Book Bounty',
         theme: ThemeData(
           primarySwatch: Colors.blue,
@@ -27,7 +32,7 @@ class MyApp extends StatelessWidget {
             if (snapshot.hasData) {
               return HomeScreen();
             } else {
-              return LoginScreen();
+              return AuthScreen();
             }
           },
         ));
