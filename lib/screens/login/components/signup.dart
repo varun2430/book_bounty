@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:book_bounty/main.dart';
 import 'package:book_bounty/utils.dart';
+import 'package:flutter_svg/svg.dart';
 
 class SignUp extends StatefulWidget {
   final VoidCallback onClickedLogIn;
@@ -62,7 +63,12 @@ class _SignUpState extends State<SignUp> {
           child: Column(
             children: [
               SizedBox(
-                height: size.height * 0.25,
+                height: size.height * 0.1,
+              ),
+              SvgPicture.asset('assets/images/undraw_sign_up.svg',
+                  height: size.height * 0.3),
+              SizedBox(
+                height: size.height * 0.1,
               ),
               Padding(
                 padding: EdgeInsets.only(bottom: 20),
