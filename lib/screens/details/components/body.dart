@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:book_bounty/screens/details/components/book_title_with_image.dart';
 import 'package:book_bounty/screens/details/components/location_and_condition.dart';
@@ -6,7 +7,7 @@ import 'package:book_bounty/screens/details/components/know_more_and_apply.dart'
 import 'package:book_bounty/models/book.dart';
 
 class Body extends StatelessWidget {
-  final Book book;
+  final QueryDocumentSnapshot<Object?> book;
   const Body({super.key, required this.book});
 
   @override
@@ -36,16 +37,16 @@ class Body extends StatelessWidget {
                   child: Column(
                     children: [
                       LocationAndCondition(
-                          location: book.location, condition: book.condition),
-                      Description(book_desc: book.description),
+                          location: book.get('location'), condition: book.get('condition')),
+                      Description(book_desc: book.get('description')),
                       KnowMoreAndApply(),
                     ],
                   ),
                 ),
                 BookTitleWithImage(
-                  title: book.title,
-                  authors: book.authors,
-                  coverImage: book.coverImage,
+                  title: book.get('title'),
+                  author: book.get('author'),
+                  coverImage: book.get('image'),
                 )
               ],
             ),

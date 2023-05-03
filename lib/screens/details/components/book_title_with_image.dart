@@ -3,13 +3,13 @@ import 'package:book_bounty/models/book.dart';
 
 class BookTitleWithImage extends StatelessWidget {
   final String title;
-  final List<String> authors;
+  final String author;
   final String coverImage;
 
   const BookTitleWithImage({
     super.key,
     required this.title,
-    required this.authors,
+    required this.author,
     required this.coverImage,
   });
 
@@ -31,7 +31,7 @@ class BookTitleWithImage extends StatelessWidget {
             ),
           ),
           Text(
-            authors[0],
+            author,
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w500,
@@ -43,7 +43,7 @@ class BookTitleWithImage extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: Image.asset(
+                child: Image.network(
                   coverImage,
                   height: size.height * 0.28,
                 ),
