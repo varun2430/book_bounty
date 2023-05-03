@@ -1,6 +1,6 @@
 # book_bounty
 
-A new Flutter project.
+A new C2C Book Donation App Flutter project.
 
 ## Getting Started
 
