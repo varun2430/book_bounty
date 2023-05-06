@@ -1,4 +1,11 @@
+import 'dart:ui';
+import 'package:path/path.dart';
 import 'package:flutter/material.dart';
+import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+
+import 'package:image_picker/image_picker.dart';
 
 class Body extends StatefulWidget {
   const Body({super.key});
@@ -17,6 +24,7 @@ class _BodyState extends State<Body> {
   final imageController = TextEditingController();
   final conditionController = TextEditingController();
   final locationController = TextEditingController();
+  String imageURL = '';
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +120,6 @@ class _BodyState extends State<Body> {
                     padding: const EdgeInsets.only(bottom: 12),
                     child: TextFormField(
                       controller: imageController,
-                      textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
                         labelText: 'Image',
                         border: OutlineInputBorder(
@@ -121,6 +128,29 @@ class _BodyState extends State<Body> {
                       ),
                     ),
                   ),
+                  IconButton(
+                      onPressed: () async {
+                        ImagePicker imagePicker = ImagePicker();
+                        XFile? file = await imagePicker.pickImage(
+                            source: ImageSource.camera);
+                        if (file == null) return;
+                        String uniqueFileName =
+                            DateTime.now().millisecondsSinceEpoch.toString();
+                        Reference referenceRoot =
+                            FirebaseStorage.instance.ref();
+                        Reference referenceDirImages =
+                            referenceRoot.child('images');
+                        Reference referenceImageToUpload =
+                            referenceDirImages.child(uniqueFileName);
+                        try {
+                          await referenceImageToUpload.putFile(File(file.path));
+                          imageURL =
+                              await referenceImageToUpload.getDownloadURL();
+                        } catch (e) {
+                          //some error
+                        }
+                      },
+                      icon: Icon(Icons.camera_alt)),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 12),
                     child: TextFormField(
