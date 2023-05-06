@@ -4,7 +4,6 @@ import 'package:book_bounty/screens/details/components/book_title_with_image.dar
 import 'package:book_bounty/screens/details/components/location_and_condition.dart';
 import 'package:book_bounty/screens/details/components/description.dart';
 import 'package:book_bounty/screens/details/components/know_more_and_apply.dart';
-import 'package:book_bounty/models/book.dart';
 
 class Body extends StatelessWidget {
   final QueryDocumentSnapshot<Object?> book;
@@ -37,9 +36,10 @@ class Body extends StatelessWidget {
                   child: Column(
                     children: [
                       LocationAndCondition(
-                          location: book.get('location'), condition: book.get('condition')),
+                          location: book.get('location'),
+                          condition: book.get('condition')),
                       Description(book_desc: book.get('description')),
-                      KnowMoreAndApply(),
+                      KnowMoreAndApply(book: book),
                     ],
                   ),
                 ),

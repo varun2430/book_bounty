@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:book_bounty/screens/home/components/categories.dart';
 import 'package:book_bounty/screens/home/components/book_card.dart';
 import 'package:book_bounty/screens/details/details_screen.dart';
-import 'package:book_bounty/models/book.dart';
 
 class Body extends StatefulWidget {
   const Body({
@@ -33,7 +32,9 @@ class _BodyState extends State<Body> {
                 }
 
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
                 }
 
                 return GridView.builder(

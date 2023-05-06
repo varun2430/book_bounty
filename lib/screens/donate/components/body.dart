@@ -1,4 +1,9 @@
+import 'package:book_bounty/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+import '../../../main.dart';
 
 class Body extends StatefulWidget {
   const Body({super.key});
@@ -17,6 +22,52 @@ class _BodyState extends State<Body> {
   final imageController = TextEditingController();
   final conditionController = TextEditingController();
   final locationController = TextEditingController();
+
+  @override
+  void dispose() {
+    isbnController.dispose();
+    titleController.dispose();
+    authorController.dispose();
+    genreController.dispose();
+    descriptionController.dispose();
+    imageController.dispose();
+    conditionController.dispose();
+    locationController.dispose();
+
+    super.dispose();
+  }
+
+  Future<void> donate() async {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => Center(
+              child: CircularProgressIndicator(),
+            ));
+
+    final myCollectionRef = FirebaseFirestore.instance.collection('book');
+
+    final myFields = {
+      'isbn': isbnController.text.trim(),
+      'title': titleController.text.trim(),
+      'author': authorController.text.trim(),
+      'genre': genreController.text.trim(),
+      'description': descriptionController.text.trim(),
+      'image': imageController.text.trim(),
+      'condition': conditionController.text.trim(),
+      'location': locationController.text.trim(),
+      'donated_by': FirebaseAuth.instance.currentUser!.uid,
+      'applied_by': [],
+    };
+
+    try {
+      await myCollectionRef.add(myFields);
+    } catch (error) {
+      Utils.showSnackBar("Coudn't donate book.");
+    }
+
+    navigatorKey.currentState!.popUntil((route) => route.isFirst);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -151,7 +202,7 @@ class _BodyState extends State<Body> {
                     height: 50,
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: donate,
                       style: ElevatedButton.styleFrom(
                         primary: Colors.grey[500],
                         shape: RoundedRectangleBorder(

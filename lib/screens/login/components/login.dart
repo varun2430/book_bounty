@@ -42,8 +42,6 @@ class _LogInState extends State<LogIn> {
         password: passwordController.text.trim(),
       );
     } on FirebaseAuthException catch (e) {
-      print(e);
-
       Utils.showSnackBar(e.message);
     }
 
