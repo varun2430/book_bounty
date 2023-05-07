@@ -16,6 +16,9 @@ class Body extends StatefulWidget {
   State<Body> createState() => _BodyState();
 }
 
+String imageURL = '';
+String selectedImagePath = '';
+
 class _BodyState extends State<Body> {
   final _formKey = GlobalKey<FormState>();
   final isbnController = TextEditingController();
@@ -26,7 +29,6 @@ class _BodyState extends State<Body> {
   final imageController = TextEditingController();
   final conditionController = TextEditingController();
   final locationController = TextEditingController();
-  String imageURL = '';
 
   @override
   void dispose() {
@@ -46,9 +48,19 @@ class _BodyState extends State<Body> {
     showDialog(
         context: context,
         barrierDismissible: false,
-        builder: (context) => Center(
+        builder: (context) => const Center(
               child: CircularProgressIndicator(),
             ));
+    String uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference referenceRoot = FirebaseStorage.instance.ref();
+    Reference referenceDirImages = referenceRoot.child('images');
+    Reference referenceImageToUpload = referenceDirImages.child(uniqueFileName);
+    try {
+      await referenceImageToUpload.putFile(File(selectedImagePath));
+      imageURL = await referenceImageToUpload.getDownloadURL();
+    } catch (e) {
+      Utils.showSnackBar("Image not uploaded.");
+    }
 
     final myCollectionRef = FirebaseFirestore.instance.collection('book');
 
@@ -84,8 +96,8 @@ class _BodyState extends State<Body> {
         ),
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 22),
+            const Padding(
+              padding: EdgeInsets.only(bottom: 22),
               child: Text(
                 "Donate Book",
                 style: TextStyle(
@@ -104,11 +116,18 @@ class _BodyState extends State<Body> {
                       controller: isbnController,
                       keyboardType: TextInputType.number,
                       textInputAction: TextInputAction.next,
-                      decoration: InputDecoration(
-                        labelText: 'ISBN',
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
+                            borderSide: BorderSide(color: Colors.black)),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Color(0xFF66ffee), width: 2)),
+                        prefixIcon: Icon(
+                          Icons.book,
+                          color: Colors.green,
                         ),
+                        labelText: 'ISBN',
+                        hintText: 'ISBN',
                       ),
                     ),
                   ),
@@ -117,11 +136,18 @@ class _BodyState extends State<Body> {
                     child: TextFormField(
                       controller: titleController,
                       textInputAction: TextInputAction.next,
-                      decoration: InputDecoration(
-                        labelText: 'Title',
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
+                            borderSide: BorderSide(color: Colors.black)),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Color(0xFF66ffee), width: 2)),
+                        prefixIcon: Icon(
+                          Icons.book,
+                          color: Colors.green,
                         ),
+                        labelText: 'Title',
+                        hintText: 'Title',
                       ),
                     ),
                   ),
@@ -130,11 +156,18 @@ class _BodyState extends State<Body> {
                     child: TextFormField(
                       controller: authorController,
                       textInputAction: TextInputAction.next,
-                      decoration: InputDecoration(
-                        labelText: 'Authors',
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
+                            borderSide: BorderSide(color: Colors.black)),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Color(0xFF66ffee), width: 2)),
+                        prefixIcon: Icon(
+                          Icons.book,
+                          color: Colors.green,
                         ),
+                        labelText: 'Authors',
+                        hintText: 'Authors',
                       ),
                     ),
                   ),
@@ -143,11 +176,18 @@ class _BodyState extends State<Body> {
                     child: TextFormField(
                       controller: genreController,
                       textInputAction: TextInputAction.next,
-                      decoration: InputDecoration(
-                        labelText: 'Genre',
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
+                            borderSide: BorderSide(color: Colors.black)),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Color(0xFF66ffee), width: 2)),
+                        prefixIcon: Icon(
+                          Icons.book,
+                          color: Colors.green,
                         ),
+                        labelText: 'Genre',
+                        hintText: 'Genre',
                       ),
                     ),
                   ),
@@ -156,60 +196,38 @@ class _BodyState extends State<Body> {
                     child: TextFormField(
                       controller: descriptionController,
                       textInputAction: TextInputAction.next,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black)),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Color(0xFF66ffee), width: 2)),
+                        prefixIcon: Icon(
+                          Icons.book,
+                          color: Colors.green,
+                        ),
                         labelText: 'Description',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
+                        hintText: 'Description',
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 12),
-                    child: TextFormField(
-                      controller: imageController,
-                      textInputAction: TextInputAction.next,
-                      decoration: InputDecoration(
-                        labelText: 'Image',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                      ),
-                    ),
-                  ),
-                  IconButton(
-                      onPressed: () async {
-                        ImagePicker imagePicker = ImagePicker();
-                        XFile? file = await imagePicker.pickImage(
-                            source: ImageSource.camera);
-                        if (file == null) return;
-                        String uniqueFileName =
-                            DateTime.now().millisecondsSinceEpoch.toString();
-                        Reference referenceRoot =
-                            FirebaseStorage.instance.ref();
-                        Reference referenceDirImages =
-                            referenceRoot.child('images');
-                        Reference referenceImageToUpload =
-                            referenceDirImages.child(uniqueFileName);
-                        try {
-                          await referenceImageToUpload.putFile(File(file.path));
-                          imageURL =
-                              await referenceImageToUpload.getDownloadURL();
-                        } catch (e) {
-                          Utils.showSnackBar("Image not uploaded.");
-                        }
-                      },
-                      icon: Icon(Icons.camera_alt)),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 12),
                     child: TextFormField(
                       controller: conditionController,
                       textInputAction: TextInputAction.next,
-                      decoration: InputDecoration(
-                        labelText: 'Condition',
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
+                            borderSide: BorderSide(color: Colors.black)),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Color(0xFF66ffee), width: 2)),
+                        prefixIcon: Icon(
+                          Icons.book,
+                          color: Colors.green,
                         ),
+                        labelText: 'Condition',
+                        hintText: 'Condition',
                       ),
                     ),
                   ),
@@ -218,13 +236,61 @@ class _BodyState extends State<Body> {
                     child: TextFormField(
                       controller: locationController,
                       textInputAction: TextInputAction.done,
-                      decoration: InputDecoration(
-                        labelText: 'Location',
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
+                            borderSide: BorderSide(color: Colors.black)),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Color(0xFF66ffee), width: 2)),
+                        prefixIcon: Icon(
+                          Icons.book,
+                          color: Colors.green,
                         ),
+                        labelText: 'Location',
+                        hintText: 'Location',
                       ),
                     ),
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      selectedImagePath == ''
+                          ? Image.asset(
+                              'assets/images/image_placeholder.png',
+                              height: 200,
+                              width: 200,
+                              fit: BoxFit.fill,
+                            )
+                          : Image.file(
+                              File(selectedImagePath),
+                              height: 200,
+                              width: 200,
+                              fit: BoxFit.fill,
+                            ),
+                      const Text(
+                        'Select Image',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20.0),
+                      ),
+                      const SizedBox(
+                        height: 20.0,
+                      ),
+                      ElevatedButton(
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.green),
+                              padding: MaterialStateProperty.all(
+                                  const EdgeInsets.all(20)),
+                              textStyle: MaterialStateProperty.all(
+                                  const TextStyle(
+                                      fontSize: 14, color: Colors.white))),
+                          onPressed: () async {
+                            selectImage();
+                            setState(() {});
+                          },
+                          child: const Text('Select')),
+                      const SizedBox(height: 10),
+                    ],
                   ),
                   SizedBox(
                     height: 50,
@@ -247,5 +313,120 @@ class _BodyState extends State<Body> {
         ),
       ),
     );
+  }
+
+  Future selectImage() {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0)), //this right here
+            child: Container(
+              height: 150,
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Column(
+                  children: [
+                    const Text(
+                      'Select Image From !',
+                      style: TextStyle(
+                          fontSize: 18.0, fontWeight: FontWeight.bold),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        GestureDetector(
+                          onTap: () async {
+                            selectedImagePath = await selectImageFromGallery();
+                            print('Image_Path:-');
+                            print(selectedImagePath);
+                            if (selectedImagePath != '') {
+                              Navigator.pop(context);
+                              setState(() {});
+                            } else {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(const SnackBar(
+                                content: Text("No Image Selected !"),
+                              ));
+                            }
+                          },
+                          child: Card(
+                              elevation: 5,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  children: [
+                                    Image.asset(
+                                      'assets/images/gallery.png',
+                                      height: 60,
+                                      width: 60,
+                                    ),
+                                    Text('Gallery'),
+                                  ],
+                                ),
+                              )),
+                        ),
+                        GestureDetector(
+                          onTap: () async {
+                            selectedImagePath = await selectImageFromCamera();
+                            print('Image_Path:-');
+                            print(selectedImagePath);
+
+                            if (selectedImagePath != '') {
+                              Navigator.pop(context);
+                              setState(() {});
+                            } else {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(const SnackBar(
+                                content: Text("No Image Captured !"),
+                              ));
+                            }
+                          },
+                          child: Card(
+                              elevation: 5,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  children: [
+                                    Image.asset(
+                                      'assets/images/camera.png',
+                                      height: 60,
+                                      width: 60,
+                                    ),
+                                    Text('Camera'),
+                                  ],
+                                ),
+                              )),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ),
+          );
+        });
+  }
+
+  selectImageFromGallery() async {
+    XFile? file = await ImagePicker()
+        .pickImage(source: ImageSource.gallery, imageQuality: 10);
+    if (file != null) {
+      return file.path;
+    } else {
+      return '';
+    }
+  }
+
+  //
+  selectImageFromCamera() async {
+    XFile? file = await ImagePicker()
+        .pickImage(source: ImageSource.camera, imageQuality: 10);
+    if (file != null) {
+      return file.path;
+    } else {
+      return '';
+    }
   }
 }
