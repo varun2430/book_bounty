@@ -5,18 +5,18 @@ import 'package:book_bounty/main.dart';
 import 'package:book_bounty/utils.dart';
 import 'package:flutter_svg/svg.dart';
 
-class LogIn extends StatefulWidget {
-  final VoidCallback onClickedSignUp;
-  const LogIn({
+class SignUp extends StatefulWidget {
+  final VoidCallback onClickedLogIn;
+  const SignUp({
     super.key,
-    required this.onClickedSignUp,
+    required this.onClickedLogIn,
   });
 
   @override
-  State<LogIn> createState() => _LogInState();
+  State<SignUp> createState() => _SignUpState();
 }
 
-class _LogInState extends State<LogIn> {
+class _SignUpState extends State<SignUp> {
   final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -29,19 +29,21 @@ class _LogInState extends State<LogIn> {
     super.dispose();
   }
 
-  Future signIn() async {
+  Future signUp() async {
     showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (context) => Center(
-              child: CircularProgressIndicator(),
-            ));
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => Center(child: CircularProgressIndicator()),
+    );
+
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
     } on FirebaseAuthException catch (e) {
+      print(e);
+
       Utils.showSnackBar(e.message);
     }
 
@@ -63,7 +65,7 @@ class _LogInState extends State<LogIn> {
               SizedBox(
                 height: size.height * 0.1,
               ),
-              SvgPicture.asset('assets/images/undraw_login.svg',
+              SvgPicture.asset('assets/images/undraw_sign_up.svg',
                   height: size.height * 0.3),
               SizedBox(
                 height: size.height * 0.1,
@@ -71,7 +73,7 @@ class _LogInState extends State<LogIn> {
               Padding(
                 padding: EdgeInsets.only(bottom: 20),
                 child: Text(
-                  "Login",
+                  "Sign Up",
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -103,6 +105,7 @@ class _LogInState extends State<LogIn> {
                       child: TextFormField(
                         controller: passwordController,
                         textInputAction: TextInputAction.done,
+                        obscureText: true,
                         decoration: InputDecoration(
                           labelText: 'Password',
                           border: OutlineInputBorder(
@@ -115,16 +118,16 @@ class _LogInState extends State<LogIn> {
                       height: 50,
                       width: double.infinity,
                       child: ElevatedButton.icon(
-                        onPressed: signIn,
+                        onPressed: signUp,
                         style: ElevatedButton.styleFrom(
                           primary: Colors.grey[500],
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(25),
                           ),
                         ),
-                        icon: Icon(Icons.lock_open),
+                        icon: Icon(Icons.arrow_forward),
                         label: Text(
-                          "Sign In",
+                          "Sign Up",
                           style: TextStyle(fontSize: 18),
                         ),
                       ),
@@ -134,15 +137,15 @@ class _LogInState extends State<LogIn> {
                     ),
                     RichText(
                       text: TextSpan(
-                        text: 'No account? ',
+                        text: 'Already have an account?  ',
                         style: TextStyle(
                           color: Colors.black,
                         ),
                         children: [
                           TextSpan(
                             recognizer: TapGestureRecognizer()
-                              ..onTap = widget.onClickedSignUp,
-                            text: 'Sign Up',
+                              ..onTap = widget.onClickedLogIn,
+                            text: 'Log In',
                             style: TextStyle(
                               color: Colors.blue,
                             ),

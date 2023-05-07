@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:book_bounty/screens/login/components/login.dart';
-import 'package:book_bounty/screens/login/components/signup.dart';
+import 'package:book_bounty/screens/auth/components/login.dart';
+import 'package:book_bounty/screens/auth/components/signup.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:book_bounty/utils.dart';
-import 'package:book_bounty/screens/login/auth_screen.dart';
+import 'package:book_bounty/screens/auth/auth_screen.dart';
 import 'package:book_bounty/screens/home/home_screen.dart';
 
 Future main() async {
