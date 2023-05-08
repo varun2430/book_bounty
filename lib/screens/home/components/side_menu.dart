@@ -7,7 +7,6 @@ class SideMenu extends StatelessWidget {
     super.key,
     this.user_email,
   });
-
   @override
   Widget build(BuildContext context) {
     return Drawer(

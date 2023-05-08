@@ -51,7 +51,7 @@ class _CategoriesState extends State<Categories> {
               categories[index],
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: selectedIndex == index ? Colors.black : Colors.grey[300],
+                color: selectedIndex == index ? Colors.black : Colors.blue,
               ),
             ),
             Container(

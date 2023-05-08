@@ -24,7 +24,7 @@ class SearchAndMenuButton extends StatelessWidget {
                 enabledBorder: InputBorder.none,
                 focusedBorder: InputBorder.none,
                 hintText: "Search Book",
-                prefixIcon: Icon(Icons.search),
+                prefixIcon: Icon(Icons.search,color: Colors.blueAccent,),
               ),
             ),
           ),
@@ -49,7 +49,7 @@ class SearchAndMenuButton extends StatelessWidget {
             child: Icon(
               Icons.account_circle_outlined,
               size: 34,
-              color: Colors.black,
+              color: Color(0xFFB4E4FF),
             ),
           ),
         ),
