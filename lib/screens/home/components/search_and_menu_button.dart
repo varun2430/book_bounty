@@ -20,33 +20,34 @@ class SearchAndMenuButton extends StatelessWidget {
             ),
             child: TextField(
               onChanged: (value) {},
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 enabledBorder: InputBorder.none,
                 focusedBorder: InputBorder.none,
                 hintText: "Search Book",
-                prefixIcon: Icon(Icons.search,color: Colors.blueAccent,),
+                prefixIcon: Icon(
+                  Icons.search,
+                  color: Colors.blueAccent,
+                ),
               ),
             ),
           ),
         ),
-        SizedBox(
-          width: 4,
-        ),
+        const SizedBox(width: 4),
         InkWell(
           onTap: () => Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => ProfileScreen(),
+                builder: (context) => const ProfileScreen(),
               )),
           borderRadius: BorderRadius.circular(50),
           child: Container(
             width: 45,
             height: 45,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.transparent,
               shape: BoxShape.circle,
             ),
-            child: Icon(
+            child: const Icon(
               Icons.account_circle_outlined,
               size: 34,
               color: Color(0xFFB4E4FF),

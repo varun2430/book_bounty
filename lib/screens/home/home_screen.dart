@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:book_bounty/screens/home/components/body.dart';
 import 'package:book_bounty/screens/home/components/search_and_menu_button.dart';
@@ -10,20 +9,20 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFB4E4FF),
+      backgroundColor: const Color(0xFFB4E4FF),
       appBar: buildAppBar(context),
-      body: Body(),
+      body: const Body(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: ElevatedButton(
         onPressed: () => Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => DonateScreen(),
+              builder: (context) => const DonateScreen(),
             )),
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.blueAccent,
         ),
-        child: Text("DONATE"),
+        child: const Text("DONATE"),
       ),
     );
   }
@@ -31,8 +30,8 @@ class HomeScreen extends StatelessWidget {
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
       elevation: 0,
-      backgroundColor: Color(0xFF146C94),
-      title: SearchAndMenuButton(),
+      backgroundColor: const Color(0xFF146C94),
+      title: const SearchAndMenuButton(),
     );
   }
 }

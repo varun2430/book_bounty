@@ -1,25 +1,23 @@
 import 'package:flutter/material.dart';
 
 class Description extends StatelessWidget {
+  final String bookDesc;
+
   const Description({
     super.key,
-    required this.book_desc,
+    required this.bookDesc,
   });
-
-  final String book_desc;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
         vertical: 15,
         horizontal: 5,
       ),
       child: Text(
-        book_desc,
-        style: TextStyle(
-          fontSize: 14,
-        ),
+        bookDesc,
+        style: const TextStyle(fontSize: 14),
       ),
     );
   }

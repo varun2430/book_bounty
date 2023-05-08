@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class LocationAndCondition extends StatelessWidget {
   final String location;
   final String condition;
+
   const LocationAndCondition({
     super.key,
     required this.location,
@@ -17,7 +18,7 @@ class LocationAndCondition extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 "Location",
                 style: TextStyle(
                   fontSize: 20,
@@ -26,7 +27,7 @@ class LocationAndCondition extends StatelessWidget {
               ),
               Text(
                 location,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 14,
                 ),
               )
@@ -37,7 +38,7 @@ class LocationAndCondition extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 "Condition",
                 style: TextStyle(
                   fontSize: 20,
@@ -46,7 +47,7 @@ class LocationAndCondition extends StatelessWidget {
               ),
               Text(
                 condition,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 14,
                 ),
               )

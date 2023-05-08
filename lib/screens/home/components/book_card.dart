@@ -1,5 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class BookCard extends StatelessWidget {
   final QueryDocumentSnapshot<Object?> book;
@@ -20,10 +20,10 @@ class BookCard extends StatelessWidget {
         children: <Widget>[
           Expanded(
             child: Container(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Color(0xFF19A7CE),
+                color: const Color(0xFF19A7CE),
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Image.network(
@@ -32,12 +32,12 @@ class BookCard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(5),
+            padding: const EdgeInsets.all(5),
             child: Text(
               book.get('title'),
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
               ),
@@ -49,7 +49,7 @@ class BookCard extends StatelessWidget {
               book.get('location'),
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 10,
               ),
             ),

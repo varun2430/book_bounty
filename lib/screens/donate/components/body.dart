@@ -1,13 +1,11 @@
-import 'dart:io';
-
-import 'package:book_bounty/utils.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_picker/image_picker.dart';
-
-import '../../../main.dart';
+import 'dart:io';
+import 'package:book_bounty/main.dart';
+import 'package:book_bounty/utils.dart';
 
 class Body extends StatefulWidget {
   const Body({super.key});
@@ -298,12 +296,12 @@ class _BodyState extends State<Body> {
                     child: ElevatedButton(
                       onPressed: donate,
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.grey[500],
+                        backgroundColor: Colors.grey[500],
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(25),
                         ),
                       ),
-                      child: Text("Donate"),
+                      child: const Text("Donate"),
                     ),
                   )
                 ],
@@ -322,7 +320,7 @@ class _BodyState extends State<Body> {
           return Dialog(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0)), //this right here
-            child: Container(
+            child: SizedBox(
               height: 150,
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
@@ -339,8 +337,6 @@ class _BodyState extends State<Body> {
                         GestureDetector(
                           onTap: () async {
                             selectedImagePath = await selectImageFromGallery();
-                            print('Image_Path:-');
-                            print(selectedImagePath);
                             if (selectedImagePath != '') {
                               Navigator.pop(context);
                               setState(() {});
@@ -362,7 +358,7 @@ class _BodyState extends State<Body> {
                                       height: 60,
                                       width: 60,
                                     ),
-                                    Text('Gallery'),
+                                    const Text('Gallery'),
                                   ],
                                 ),
                               )),
@@ -370,8 +366,6 @@ class _BodyState extends State<Body> {
                         GestureDetector(
                           onTap: () async {
                             selectedImagePath = await selectImageFromCamera();
-                            print('Image_Path:-');
-                            print(selectedImagePath);
 
                             if (selectedImagePath != '') {
                               Navigator.pop(context);
@@ -394,7 +388,7 @@ class _BodyState extends State<Body> {
                                       height: 60,
                                       width: 60,
                                     ),
-                                    Text('Camera'),
+                                    const Text('Camera'),
                                   ],
                                 ),
                               )),
@@ -419,7 +413,6 @@ class _BodyState extends State<Body> {
     }
   }
 
-  //
   selectImageFromCamera() async {
     XFile? file = await ImagePicker()
         .pickImage(source: ImageSource.camera, imageQuality: 10);

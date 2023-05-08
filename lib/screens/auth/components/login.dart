@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:book_bounty/main.dart';
 import 'package:book_bounty/utils.dart';
-import 'package:flutter_svg/svg.dart';
 
 class LogIn extends StatefulWidget {
   final VoidCallback onClickedSignUp;
@@ -33,7 +33,7 @@ class _LogInState extends State<LogIn> {
     showDialog(
         context: context,
         barrierDismissible: false,
-        builder: (context) => Center(
+        builder: (context) => const Center(
               child: CircularProgressIndicator(),
             ));
     try {
@@ -60,15 +60,11 @@ class _LogInState extends State<LogIn> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(
-                height: size.height * 0.1,
-              ),
+              SizedBox(height: size.height * 0.1),
               SvgPicture.asset('assets/images/undraw_login.svg',
                   height: size.height * 0.3),
-              SizedBox(
-                height: size.height * 0.1,
-              ),
-              Padding(
+              SizedBox(height: size.height * 0.1),
+              const Padding(
                 padding: EdgeInsets.only(bottom: 20),
                 child: Text(
                   "Login",
@@ -78,9 +74,7 @@ class _LogInState extends State<LogIn> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: size.height * 0.1,
-              ),
+              SizedBox(height: size.height * 0.1),
               Form(
                 key: _formKey,
                 child: Column(
@@ -118,25 +112,23 @@ class _LogInState extends State<LogIn> {
                       child: ElevatedButton.icon(
                         onPressed: signIn,
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.grey[500],
+                          backgroundColor: Colors.grey[500],
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(25),
                           ),
                         ),
-                        icon: Icon(Icons.lock_open),
-                        label: Text(
+                        icon: const Icon(Icons.lock_open),
+                        label: const Text(
                           "Sign In",
                           style: TextStyle(fontSize: 18),
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 24,
-                    ),
+                    const SizedBox(height: 24),
                     RichText(
                       text: TextSpan(
                         text: 'No account? ',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.black,
                         ),
                         children: [
@@ -144,7 +136,7 @@ class _LogInState extends State<LogIn> {
                             recognizer: TapGestureRecognizer()
                               ..onTap = widget.onClickedSignUp,
                             text: 'Sign Up',
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.blue,
                             ),
                           )

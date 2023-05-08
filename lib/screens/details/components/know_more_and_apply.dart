@@ -1,9 +1,9 @@
-import 'package:book_bounty/utils.dart';
+import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../../../main.dart';
+import 'package:book_bounty/main.dart';
+import 'package:book_bounty/utils.dart';
 
 class KnowMoreAndApply extends StatelessWidget {
   final QueryDocumentSnapshot<Object?> book;
@@ -37,7 +37,7 @@ class KnowMoreAndApply extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<dynamic>? applied_by = book.get('applied_by');
+    final List<dynamic>? appliedBy = book.get('applied_by');
     return Row(
       children: [
         Expanded(
@@ -52,14 +52,14 @@ class KnowMoreAndApply extends StatelessWidget {
                 googleSearch(book.get('title'));
               },
               style: ElevatedButton.styleFrom(
-                primary: Colors.grey[500],
+                backgroundColor: Colors.grey[500],
               ),
-              child: Text("KNOW MORE"),
+              child: const Text("KNOW MORE"),
             ),
           ),
         ),
         ((book.get('donated_by') != FirebaseAuth.instance.currentUser!.uid) &&
-                (!applied_by!
+                (!appliedBy!
                     .contains(FirebaseAuth.instance.currentUser!.email)))
             ? Expanded(
                 child: Padding(
@@ -71,13 +71,13 @@ class KnowMoreAndApply extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: apply,
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.grey[500],
+                      backgroundColor: Colors.grey[500],
                     ),
-                    child: Text("APPLY NOW"),
+                    child: const Text("APPLY NOW"),
                   ),
                 ),
               )
-            : SizedBox.shrink()
+            : const SizedBox.shrink()
       ],
     );
   }

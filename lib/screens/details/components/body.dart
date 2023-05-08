@@ -1,5 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:book_bounty/screens/details/components/book_title_with_image.dart';
 import 'package:book_bounty/screens/details/components/location_and_condition.dart';
 import 'package:book_bounty/screens/details/components/description.dart';
@@ -16,7 +16,6 @@ class Body extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(
-            // height: size.height,
             child: Stack(
               children: [
                 Container(
@@ -26,7 +25,7 @@ class Body extends StatelessWidget {
                     right: 20,
                     top: size.height * 0.1,
                   ),
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(24),
@@ -38,7 +37,7 @@ class Body extends StatelessWidget {
                       LocationAndCondition(
                           location: book.get('location'),
                           condition: book.get('condition')),
-                      Description(book_desc: book.get('description')),
+                      Description(bookDesc: book.get('description')),
                       KnowMoreAndApply(book: book),
                     ],
                   ),

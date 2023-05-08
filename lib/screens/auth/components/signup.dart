@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:book_bounty/main.dart';
 import 'package:book_bounty/utils.dart';
-import 'package:flutter_svg/svg.dart';
 
 class SignUp extends StatefulWidget {
   final VoidCallback onClickedLogIn;
@@ -33,7 +33,7 @@ class _SignUpState extends State<SignUp> {
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (context) => Center(child: CircularProgressIndicator()),
+      builder: (context) => const Center(child: CircularProgressIndicator()),
     );
 
     try {
@@ -42,8 +42,6 @@ class _SignUpState extends State<SignUp> {
         password: passwordController.text.trim(),
       );
     } on FirebaseAuthException catch (e) {
-      print(e);
-
       Utils.showSnackBar(e.message);
     }
 
@@ -70,7 +68,7 @@ class _SignUpState extends State<SignUp> {
               SizedBox(
                 height: size.height * 0.1,
               ),
-              Padding(
+              const Padding(
                 padding: EdgeInsets.only(bottom: 20),
                 child: Text(
                   "Sign Up",
@@ -120,25 +118,23 @@ class _SignUpState extends State<SignUp> {
                       child: ElevatedButton.icon(
                         onPressed: signUp,
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.grey[500],
+                          backgroundColor: Colors.grey[500],
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(25),
                           ),
                         ),
-                        icon: Icon(Icons.arrow_forward),
-                        label: Text(
+                        icon: const Icon(Icons.arrow_forward),
+                        label: const Text(
                           "Sign Up",
                           style: TextStyle(fontSize: 18),
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 24,
-                    ),
+                    const SizedBox(height: 24),
                     RichText(
                       text: TextSpan(
                         text: 'Already have an account?  ',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.black,
                         ),
                         children: [
@@ -146,7 +142,7 @@ class _SignUpState extends State<SignUp> {
                             recognizer: TapGestureRecognizer()
                               ..onTap = widget.onClickedLogIn,
                             text: 'Log In',
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.blue,
                             ),
                           )
