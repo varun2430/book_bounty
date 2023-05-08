@@ -23,7 +23,7 @@ class BookCard extends StatelessWidget {
               padding: EdgeInsets.all(10),
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Colors.grey[300],
+                color: Color(0xFF19A7CE),
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Image.network(
