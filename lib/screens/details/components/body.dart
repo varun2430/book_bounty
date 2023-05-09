@@ -35,7 +35,7 @@ class Body extends StatelessWidget {
                   child: Column(
                     children: [
                       LocationAndCondition(
-                          location: book.get('location'),
+                          location: '${book.get('city')}, ${book.get('state')}',
                           condition: book.get('condition')),
                       Description(bookDesc: book.get('description')),
                       KnowMoreAndApply(book: book),

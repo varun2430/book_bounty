@@ -15,32 +15,25 @@ class Body extends StatefulWidget {
   State<Body> createState() => _BodyState();
 }
 
-String? stateValue = "", cityValue = "", countryValue = "";
-String imageURL = '';
-String selectedImagePath = '';
-
 class _BodyState extends State<Body> {
   _BodyState() {
     selectedCondition = conditions[0];
     selectedGenre = genres[0];
   }
-  final conditions = ["New", "Good", "Better", "Poor"];
+  final conditions = ["New", "Good", "Fair", "Poor"];
   final genres = [
     'Art',
+    'Autobiography',
     'Biography',
     'Business',
-    'Chick Lit',
     'Children',
-    'Christian',
     'Classics',
     'Comics',
     'Contemporary',
     'Cookbooks',
     'Crime',
-    'Ebooks',
     'Fantasy',
     'Fiction',
-    'Gay and Lesbian',
     'Graphic Novels',
     'Historical Fiction',
     'History',
@@ -67,28 +60,38 @@ class _BodyState extends State<Body> {
     'Travel',
     'Young Adult'
   ];
+
   final _formKey = GlobalKey<FormState>();
-  final isbnController = TextEditingController();
+  String imageURL = '';
+  String selectedImagePath = '';
+  String? stateValue = "", cityValue = "", countryValue = "";
+  String? selectedCondition = '', selectedGenre = '';
+  // final isbnController = TextEditingController();
   final titleController = TextEditingController();
   final authorController = TextEditingController();
-  final genreController = TextEditingController();
   final descriptionController = TextEditingController();
   final imageController = TextEditingController();
-  final conditionController = TextEditingController();
-  final locationController = TextEditingController();
-  String? selectedCondition = '', selectedGenre = '';
+
   @override
   void dispose() {
-    isbnController.dispose();
+    // isbnController.dispose();
     titleController.dispose();
     authorController.dispose();
-    genreController.dispose();
     descriptionController.dispose();
     imageController.dispose();
-    conditionController.dispose();
-    locationController.dispose();
 
     super.dispose();
+  }
+
+  getPrefixList(String str) {
+    str = str.toLowerCase();
+    List<String> prefixList = [];
+    String tmp = "";
+    for (int i = 0; i < str.length; i++) {
+      tmp = tmp + str[i];
+      prefixList.add(tmp);
+    }
+    return prefixList;
   }
 
   Future<void> donate() async {
@@ -112,16 +115,18 @@ class _BodyState extends State<Body> {
     final myCollectionRef = FirebaseFirestore.instance.collection('book');
 
     final myFields = {
-      'isbn': isbnController.text.trim(),
+      // 'isbn': isbnController.text.trim(),
       'title': titleController.text.trim(),
+      'titlePrefix': getPrefixList(titleController.text.trim()),
       'author': authorController.text.trim(),
       'genre': selectedGenre,
       'description': descriptionController.text.trim(),
       'image': imageURL,
       'condition': selectedCondition,
-      'location': "$stateValue, $cityValue",
+      'city': '$cityValue',
+      'state': '$stateValue',
       'donated_by': FirebaseAuth.instance.currentUser!.uid,
-      'applied_by': [],
+      'applied_by': '',
     };
 
     try {
@@ -157,27 +162,27 @@ class _BodyState extends State<Body> {
               key: _formKey,
               child: Column(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 12),
-                    child: TextFormField(
-                      controller: isbnController,
-                      keyboardType: TextInputType.number,
-                      textInputAction: TextInputAction.next,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black)),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Color(0xFF66ffee), width: 2)),
-                        prefixIcon: Icon(
-                          Icons.book,
-                          color: Colors.green,
-                        ),
-                        labelText: 'ISBN',
-                        hintText: 'ISBN',
-                      ),
-                    ),
-                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(bottom: 12),
+                  //   child: TextFormField(
+                  //     controller: isbnController,
+                  //     keyboardType: TextInputType.number,
+                  //     textInputAction: TextInputAction.next,
+                  //     decoration: const InputDecoration(
+                  //       border: OutlineInputBorder(
+                  //           borderSide: BorderSide(color: Colors.black)),
+                  //       focusedBorder: OutlineInputBorder(
+                  //           borderSide:
+                  //               BorderSide(color: Color(0xFF66ffee), width: 2)),
+                  //       prefixIcon: Icon(
+                  //         Icons.book,
+                  //         color: Colors.green,
+                  //       ),
+                  //       labelText: 'ISBN',
+                  //       hintText: 'ISBN',
+                  //     ),
+                  //   ),
+                  // ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 12),
                     child: TextFormField(
@@ -213,8 +218,28 @@ class _BodyState extends State<Body> {
                           Icons.book,
                           color: Colors.green,
                         ),
-                        labelText: 'Authors',
-                        hintText: 'Authors',
+                        labelText: 'Author',
+                        hintText: 'Author',
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 12),
+                    child: TextFormField(
+                      controller: descriptionController,
+                      textInputAction: TextInputAction.next,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black)),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Color(0xFF66ffee), width: 2)),
+                        prefixIcon: Icon(
+                          Icons.book,
+                          color: Colors.green,
+                        ),
+                        labelText: 'Description',
+                        hintText: 'Description',
                       ),
                     ),
                   ),
@@ -243,43 +268,6 @@ class _BodyState extends State<Body> {
                         hintText: 'Genre',
                       ),
                     ),
-                    // TextFormField(
-                    //   controller: genreController,
-                    //   textInputAction: TextInputAction.next,
-                    //   decoration: const InputDecoration(
-                    //     border: OutlineInputBorder(
-                    //         borderSide: BorderSide(color: Colors.black)),
-                    //     focusedBorder: OutlineInputBorder(
-                    //         borderSide:
-                    //             BorderSide(color: Color(0xFF66ffee), width: 2)),
-                    //     prefixIcon: Icon(
-                    //       Icons.book,
-                    //       color: Colors.green,
-                    //     ),
-                    //     labelText: 'Genre',
-                    //     hintText: 'Genre',
-                    //   ),
-                    // ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 12),
-                    child: TextFormField(
-                      controller: descriptionController,
-                      textInputAction: TextInputAction.next,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black)),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Color(0xFF66ffee), width: 2)),
-                        prefixIcon: Icon(
-                          Icons.book,
-                          color: Colors.green,
-                        ),
-                        labelText: 'Description',
-                        hintText: 'Description',
-                      ),
-                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 12),
@@ -306,23 +294,6 @@ class _BodyState extends State<Body> {
                         hintText: 'Condition',
                       ),
                     ),
-                    // TextFormField(
-                    //   controller: conditionController,
-                    //   textInputAction: TextInputAction.next,
-                    //   decoration: const InputDecoration(
-                    //     border: OutlineInputBorder(
-                    //         borderSide: BorderSide(color: Colors.black)),
-                    //     focusedBorder: OutlineInputBorder(
-                    //         borderSide:
-                    //             BorderSide(color: Color(0xFF66ffee), width: 2)),
-                    //     prefixIcon: Icon(
-                    //       Icons.book,
-                    //       color: Colors.green,
-                    //     ),
-                    //     labelText: 'Condition',
-                    //     hintText: 'Condition',
-                    //   ),
-                    // ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20),
