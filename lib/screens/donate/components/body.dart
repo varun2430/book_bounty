@@ -20,6 +20,53 @@ String imageURL = '';
 String selectedImagePath = '';
 
 class _BodyState extends State<Body> {
+  _BodyState() {
+    selectedCondition = conditions[0];
+    selectedGenre = genres[0];
+  }
+  final conditions = ["New", "Good", "Better", "Poor"];
+  final genres = [
+    'Art',
+    'Biography',
+    'Business',
+    'Chick Lit',
+    'Children',
+    'Christian',
+    'Classics',
+    'Comics',
+    'Contemporary',
+    'Cookbooks',
+    'Crime',
+    'Ebooks',
+    'Fantasy',
+    'Fiction',
+    'Gay and Lesbian',
+    'Graphic Novels',
+    'Historical Fiction',
+    'History',
+    'Horror',
+    'Humor and Comedy',
+    'Manga',
+    'Memoir',
+    'Music',
+    'Mystery',
+    'Nonfiction',
+    'Paranormal',
+    'Philosophy',
+    'Poetry',
+    'Psychology',
+    'Religion',
+    'Romance',
+    'Science',
+    'Science Fiction',
+    'Self Help',
+    'Suspense',
+    'Spirituality',
+    'Sports',
+    'Thriller',
+    'Travel',
+    'Young Adult'
+  ];
   final _formKey = GlobalKey<FormState>();
   final isbnController = TextEditingController();
   final titleController = TextEditingController();
@@ -29,7 +76,7 @@ class _BodyState extends State<Body> {
   final imageController = TextEditingController();
   final conditionController = TextEditingController();
   final locationController = TextEditingController();
-
+  String? selectedCondition = '', selectedGenre = '';
   @override
   void dispose() {
     isbnController.dispose();
@@ -68,10 +115,10 @@ class _BodyState extends State<Body> {
       'isbn': isbnController.text.trim(),
       'title': titleController.text.trim(),
       'author': authorController.text.trim(),
-      'genre': genreController.text.trim(),
+      'genre': selectedGenre,
       'description': descriptionController.text.trim(),
       'image': imageURL,
-      'condition': conditionController.text.trim(),
+      'condition': selectedCondition,
       'location': "$stateValue, $cityValue",
       'donated_by': FirebaseAuth.instance.currentUser!.uid,
       'applied_by': [],
@@ -173,9 +220,15 @@ class _BodyState extends State<Body> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 12),
-                    child: TextFormField(
-                      controller: genreController,
-                      textInputAction: TextInputAction.next,
+                    child: DropdownButtonFormField(
+                      value: selectedGenre,
+                      items: genres
+                          .map((e) => DropdownMenuItem(
+                                value: e,
+                                child: Text(e),
+                              ))
+                          .toList(),
+                      onChanged: (val) {},
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.black)),
@@ -190,6 +243,23 @@ class _BodyState extends State<Body> {
                         hintText: 'Genre',
                       ),
                     ),
+                    // TextFormField(
+                    //   controller: genreController,
+                    //   textInputAction: TextInputAction.next,
+                    //   decoration: const InputDecoration(
+                    //     border: OutlineInputBorder(
+                    //         borderSide: BorderSide(color: Colors.black)),
+                    //     focusedBorder: OutlineInputBorder(
+                    //         borderSide:
+                    //             BorderSide(color: Color(0xFF66ffee), width: 2)),
+                    //     prefixIcon: Icon(
+                    //       Icons.book,
+                    //       color: Colors.green,
+                    //     ),
+                    //     labelText: 'Genre',
+                    //     hintText: 'Genre',
+                    //   ),
+                    // ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 12),
@@ -213,9 +283,15 @@ class _BodyState extends State<Body> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 12),
-                    child: TextFormField(
-                      controller: conditionController,
-                      textInputAction: TextInputAction.next,
+                    child: DropdownButtonFormField(
+                      value: selectedCondition,
+                      items: conditions
+                          .map((e) => DropdownMenuItem(
+                                value: e,
+                                child: Text(e),
+                              ))
+                          .toList(),
+                      onChanged: (val) {},
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.black)),
@@ -230,6 +306,23 @@ class _BodyState extends State<Body> {
                         hintText: 'Condition',
                       ),
                     ),
+                    // TextFormField(
+                    //   controller: conditionController,
+                    //   textInputAction: TextInputAction.next,
+                    //   decoration: const InputDecoration(
+                    //     border: OutlineInputBorder(
+                    //         borderSide: BorderSide(color: Colors.black)),
+                    //     focusedBorder: OutlineInputBorder(
+                    //         borderSide:
+                    //             BorderSide(color: Color(0xFF66ffee), width: 2)),
+                    //     prefixIcon: Icon(
+                    //       Icons.book,
+                    //       color: Colors.green,
+                    //     ),
+                    //     labelText: 'Condition',
+                    //     hintText: 'Condition',
+                    //   ),
+                    // ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20),
