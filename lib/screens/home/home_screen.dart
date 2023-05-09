@@ -9,7 +9,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFB4E4FF),
+      backgroundColor: Colors.grey[900],
       appBar: buildAppBar(context),
       body: const Body(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -20,7 +20,10 @@ class HomeScreen extends StatelessWidget {
               builder: (context) => const DonateScreen(),
             )),
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.blueAccent,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30)
+          ),
+          backgroundColor: Colors.lightBlueAccent,
         ),
         child: const Text("DONATE"),
       ),
@@ -30,7 +33,7 @@ class HomeScreen extends StatelessWidget {
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
       elevation: 0,
-      backgroundColor: const Color(0xFF146C94),
+      backgroundColor: Colors.lightBlueAccent,
       title: const SearchAndMenuButton(),
     );
   }

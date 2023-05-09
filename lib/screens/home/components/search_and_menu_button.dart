@@ -50,7 +50,7 @@ class SearchAndMenuButton extends StatelessWidget {
             child: const Icon(
               Icons.account_circle_outlined,
               size: 34,
-              color: Color(0xFFB4E4FF),
+              color: Colors.blue,
             ),
           ),
         ),
