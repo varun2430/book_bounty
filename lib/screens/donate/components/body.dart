@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:book_bounty/main.dart';
 import 'package:book_bounty/utils.dart';
+import 'package:csc_picker/csc_picker.dart';
 
 class Body extends StatefulWidget {
   const Body({super.key});
@@ -14,6 +15,7 @@ class Body extends StatefulWidget {
   State<Body> createState() => _BodyState();
 }
 
+String? stateValue = "", cityValue = "", countryValue = "";
 String imageURL = '';
 String selectedImagePath = '';
 
@@ -70,7 +72,7 @@ class _BodyState extends State<Body> {
       'description': descriptionController.text.trim(),
       'image': imageURL,
       'condition': conditionController.text.trim(),
-      'location': locationController.text.trim(),
+      'location': "$stateValue, $cityValue",
       'donated_by': FirebaseAuth.instance.currentUser!.uid,
       'applied_by': [],
     };
@@ -231,22 +233,27 @@ class _BodyState extends State<Body> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20),
-                    child: TextFormField(
-                      controller: locationController,
-                      textInputAction: TextInputAction.done,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black)),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Color(0xFF66ffee), width: 2)),
-                        prefixIcon: Icon(
-                          Icons.book,
-                          color: Colors.green,
-                        ),
-                        labelText: 'Location',
-                        hintText: 'Location',
-                      ),
+                    child: CSCPicker(
+                      showStates: true,
+                      showCities: true,
+                      defaultCountry: CscCountry.India,
+                      disableCountry: true,
+                      onCountryChanged: (value) {
+                        setState(() {
+                          ///store value in country variable
+                          countryValue = value;
+                        });
+                      },
+                      onStateChanged: (value) {
+                        setState(() {
+                          stateValue = value;
+                        });
+                      },
+                      onCityChanged: (value) {
+                        setState(() {
+                          cityValue = value;
+                        });
+                      },
                     ),
                   ),
                   Column(
