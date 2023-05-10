@@ -409,6 +409,7 @@ class _BodyState extends State<Body> {
                           onTap: () async {
                             selectedImagePath = await selectImageFromGallery();
                             if (selectedImagePath != '') {
+                              // ignore: use_build_context_synchronously
                               Navigator.pop(context);
                               setState(() {});
                             } else {
@@ -439,6 +440,7 @@ class _BodyState extends State<Body> {
                             selectedImagePath = await selectImageFromCamera();
 
                             if (selectedImagePath != '') {
+                              // ignore: use_build_context_synchronously
                               Navigator.pop(context);
                               setState(() {});
                             } else {
