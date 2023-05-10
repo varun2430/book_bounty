@@ -47,7 +47,7 @@ class BookCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 5),
             child: Text(
-              book.get('location'),
+              '${book.get('city')}, ${book.get('state')}',
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
               style: const TextStyle(

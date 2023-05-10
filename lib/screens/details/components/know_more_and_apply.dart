@@ -14,10 +14,10 @@ class KnowMoreAndApply extends StatelessWidget {
 
   Future<void> apply() async {
     try {
-      await FirebaseFirestore.instance.collection('book').doc(book.id).update({
-        'applied_by':
-            FieldValue.arrayUnion([FirebaseAuth.instance.currentUser!.email])
-      });
+      await FirebaseFirestore.instance
+          .collection('book')
+          .doc(book.id)
+          .update({'applied_by': FirebaseAuth.instance.currentUser!.email});
     } catch (e) {
       Utils.showSnackBar("Could not apply.");
     }
@@ -37,7 +37,7 @@ class KnowMoreAndApply extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<dynamic>? appliedBy = book.get('applied_by');
+    final appliedBy = book.get('applied_by');
     return Row(
       children: [
         Expanded(
@@ -59,8 +59,7 @@ class KnowMoreAndApply extends StatelessWidget {
           ),
         ),
         ((book.get('donated_by') != FirebaseAuth.instance.currentUser!.uid) &&
-                (!appliedBy!
-                    .contains(FirebaseAuth.instance.currentUser!.email)))
+                (appliedBy != FirebaseAuth.instance.currentUser!.email))
             ? Expanded(
                 child: Padding(
                   padding: const EdgeInsets.only(

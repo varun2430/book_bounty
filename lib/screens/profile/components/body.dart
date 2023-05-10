@@ -195,11 +195,11 @@ class _BodyState extends State<Body> {
                           children: [
                             Expanded(child: Text(data['title'])),
                             const SizedBox(width: 10),
-                            Expanded(child: Text(data['applied_by'][0])),
+                            Expanded(child: Text(data['applied_by'])),
                             TextButton(
                               onPressed: () {
                                 _launchEmailClient(
-                                    data['applied_by'][0], data['title']);
+                                    data['applied_by'], data['title']);
                               },
                               child: const Icon(
                                 Icons.mail,
