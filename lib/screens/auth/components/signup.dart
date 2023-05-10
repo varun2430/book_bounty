@@ -55,16 +55,15 @@ class _SignUpState extends State<SignUp> {
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       alignment: Alignment.center,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [
-              Color(0xFF544a7d),
-              Color(0xFFffd452),
-            ],
-          )
-      ),
+        begin: Alignment.topRight,
+        end: Alignment.bottomLeft,
+        colors: [
+          Color(0xFF544a7d),
+          Color(0xFFffd452),
+        ],
+      )),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Padding(
@@ -89,7 +88,7 @@ class _SignUpState extends State<SignUp> {
                     "Sign Up",
                     style: TextStyle(
                       fontStyle: FontStyle.italic,
-                      color:Color(0xFF544a7d),
+                      color: Color(0xFF544a7d),
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),
@@ -108,7 +107,10 @@ class _SignUpState extends State<SignUp> {
                           controller: emailController,
                           textInputAction: TextInputAction.next,
                           decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.email,color: Color(0xFF544a7d),),
+                            prefixIcon: const Icon(
+                              Icons.email,
+                              color: Color(0xFF544a7d),
+                            ),
                             labelText: 'Email',
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(30),
@@ -123,7 +125,10 @@ class _SignUpState extends State<SignUp> {
                           textInputAction: TextInputAction.done,
                           obscureText: true,
                           decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.key,color: Color(0xFF544a7d),),
+                            prefixIcon: const Icon(
+                              Icons.key,
+                              color: Color(0xFF544a7d),
+                            ),
                             labelText: 'Password',
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(30),
@@ -137,7 +142,7 @@ class _SignUpState extends State<SignUp> {
                         child: ElevatedButton.icon(
                           onPressed: signUp,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFF544a7d),
+                            backgroundColor: const Color(0xFF544a7d),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(25),
                             ),

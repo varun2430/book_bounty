@@ -55,16 +55,15 @@ class _LogInState extends State<LogIn> {
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       alignment: Alignment.center,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [
-              Colors.blue,
-              Colors.yellow,
-            ],
-          )
-      ),
+        begin: Alignment.topRight,
+        end: Alignment.bottomLeft,
+        colors: [
+          Colors.blue,
+          Colors.yellow,
+        ],
+      )),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Padding(
@@ -102,7 +101,10 @@ class _LogInState extends State<LogIn> {
                           controller: emailController,
                           textInputAction: TextInputAction.next,
                           decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.email,color: Colors.lightBlueAccent,),
+                            prefixIcon: const Icon(
+                              Icons.email,
+                              color: Colors.lightBlueAccent,
+                            ),
                             labelText: 'Email',
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(30),
@@ -117,7 +119,10 @@ class _LogInState extends State<LogIn> {
                           textInputAction: TextInputAction.done,
                           obscureText: true,
                           decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.key,color: Colors.lightBlueAccent,),
+                            prefixIcon: const Icon(
+                              Icons.key,
+                              color: Colors.lightBlueAccent,
+                            ),
                             labelText: 'Password',
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(30),
