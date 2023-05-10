@@ -138,7 +138,10 @@ class _HomeScreenState extends State<HomeScreen> {
               builder: (context) => const DonateScreen(),
             )),
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.blueAccent,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30)
+          ),
+          backgroundColor: Colors.lightBlueAccent,
         ),
         child: const Text("DONATE"),
       ),
