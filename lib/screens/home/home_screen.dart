@@ -1,11 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:book_bounty/screens/home/components/book_card.dart';
 import 'package:book_bounty/screens/donate/donate_screen.dart';
-
-import '../details/details_screen.dart';
-import '../profile/profile_screen.dart';
-import 'components/book_card.dart';
+import 'package:book_bounty/screens/details/details_screen.dart';
+import 'package:book_bounty/screens/profile/profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -15,7 +14,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final img_url = [
+  final imgUrl = [
     'https://wallpapers.net/web/wallpapers/dark-forest-passage-hd-wallpaper/thumbnail/lg.jpg',
     'https://c4.wallpaperflare.com/wallpaper/288/993/204/dark-forest-hd-wallpaper-preview.jpg',
     'https://c4.wallpaperflare.com/wallpaper/127/202/462/green-dark-jungle-wallpaper-thumb.jpg'
@@ -136,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 30),
                   child: CarouselSlider.builder(
-                      itemCount: img_url.length,
+                      itemCount: imgUrl.length,
                       options: CarouselOptions(
                         height: 200,
                         autoPlay: true,
@@ -145,7 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         return Container(
                           margin: const EdgeInsets.symmetric(horizontal: 10),
                           child: Image.network(
-                            img_url[index],
+                            imgUrl[index],
                             fit: BoxFit.cover,
                           ),
                         );
@@ -188,8 +187,19 @@ class _HomeScreenState extends State<HomeScreen> {
                               press: () => Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          DetailsScreen(book: data))),
+                                      builder: (context) => DetailsScreen(
+                                            id: data.id,
+                                            donatedBy: data.get('donated_by'),
+                                            appliedBy: data.get('applied_by'),
+                                            title: data.get('title'),
+                                            author: data.get('applied_by'),
+                                            description:
+                                                data.get('description'),
+                                            image: data.get('image'),
+                                            condition: data.get('condition'),
+                                            location:
+                                                '${data.get('city')}, ${data.get('state')}',
+                                          ))),
                             );
                           },
                         );
@@ -207,18 +217,28 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemBuilder: (context, index) {
                         final key = _results.keys.elementAt(index);
                         final data = _results[key];
-                        
+
                         return Card(
                           elevation: 1,
                           margin: const EdgeInsets.symmetric(vertical: 2),
                           child: ListTile(
                             title: Text(data['title']),
                             subtitle: Text(data['author']),
-                            //   onTap: () => Navigator.push(
-                            //       context,
-                            //       MaterialPageRoute(
-                            //           builder: (context) =>
-                            //               DetailsScreen(book: data))),
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DetailsScreen(
+                                          id: key,
+                                          donatedBy: data['donated_by'],
+                                          appliedBy: data['applied_by'],
+                                          title: data['title'],
+                                          author: data['applied_by'],
+                                          description: data['description'],
+                                          image: data['image'],
+                                          condition: data['condition'],
+                                          location:
+                                              '${data['city']}, ${data['state']}',
+                                        ))),
                           ),
                         );
                       }),

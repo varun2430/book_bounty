@@ -6,17 +6,22 @@ import 'package:book_bounty/main.dart';
 import 'package:book_bounty/utils.dart';
 
 class KnowMoreAndApply extends StatelessWidget {
-  final QueryDocumentSnapshot<Object?> book;
-  const KnowMoreAndApply({
-    super.key,
-    required this.book,
-  });
+  final String id;
+  final String donatedBy;
+  final String appliedBy;
+  final String title;
+  const KnowMoreAndApply(
+      {super.key,
+      required this.id,
+      required this.donatedBy,
+      required this.appliedBy,
+      required this.title});
 
   Future<void> apply() async {
     try {
       await FirebaseFirestore.instance
           .collection('book')
-          .doc(book.id)
+          .doc(id)
           .update({'applied_by': FirebaseAuth.instance.currentUser!.email});
     } catch (e) {
       Utils.showSnackBar("Could not apply.");
@@ -37,7 +42,6 @@ class KnowMoreAndApply extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appliedBy = book.get('applied_by');
     return Row(
       children: [
         Expanded(
@@ -49,7 +53,7 @@ class KnowMoreAndApply extends StatelessWidget {
             ),
             child: ElevatedButton(
               onPressed: () {
-                googleSearch(book.get('title'));
+                googleSearch(title);
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.grey[500],
@@ -58,7 +62,7 @@ class KnowMoreAndApply extends StatelessWidget {
             ),
           ),
         ),
-        ((book.get('donated_by') != FirebaseAuth.instance.currentUser!.uid) &&
+        ((donatedBy != FirebaseAuth.instance.currentUser!.uid) &&
                 (appliedBy != FirebaseAuth.instance.currentUser!.email))
             ? Expanded(
                 child: Padding(
