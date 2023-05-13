@@ -33,6 +33,7 @@ class BookTitleWithImage extends StatelessWidget {
             author,
             style: const TextStyle(
               fontSize: 14,
+              color: Colors.white70,
               fontWeight: FontWeight.w500,
             ),
           ),

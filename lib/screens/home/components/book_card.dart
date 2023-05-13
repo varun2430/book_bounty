@@ -23,7 +23,7 @@ class BookCard extends StatelessWidget {
               padding: const EdgeInsets.all(10),
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Colors.transparent,
+                color: const Color(0xff252525),
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Image.network(
@@ -51,7 +51,7 @@ class BookCard extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
               style: const TextStyle(
-                color: Colors.grey,
+                color: Colors.white54,
                 fontSize: 10,
               ),
             ),

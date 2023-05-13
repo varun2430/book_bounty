@@ -17,7 +17,10 @@ class Description extends StatelessWidget {
       ),
       child: Text(
         bookDesc,
-        style: const TextStyle(fontSize: 14,color: Colors.white70),
+        style: const TextStyle(
+          fontSize: 14,
+          color: Colors.white70,
+        ),
       ),
     );
   }

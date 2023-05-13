@@ -26,7 +26,7 @@ class DetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: buildAppBar(context),
       body: Body(
           id: id,
@@ -47,7 +47,7 @@ class DetailsScreen extends StatelessWidget {
       elevation: 0,
       leading: IconButton(
         icon: const Icon(Icons.arrow_back),
-        color: Colors.black,
+        color: Colors.grey,
         onPressed: () => Navigator.pop(context),
       ),
     );

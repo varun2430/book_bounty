@@ -25,7 +25,10 @@ class MyApp extends StatelessWidget {
       navigatorKey: navigatorKey,
       title: 'Book Bounty',
       theme: ThemeData(
+        brightness: Brightness.dark,
         primarySwatch: Colors.blue,
+        splashColor: const Color(0xff121212),
+        scaffoldBackgroundColor: const Color(0xff121212),
       ),
       home: StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),

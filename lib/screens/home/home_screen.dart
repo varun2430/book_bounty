@@ -74,10 +74,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[900],
       appBar: AppBar(
         elevation: 0,
-        backgroundColor:Colors.grey[900],
+        backgroundColor: Colors.transparent,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -85,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Container(
                 height: 40,
                 decoration: BoxDecoration(
-                  color: Colors.grey[300],
+                  color: const Color(0xff383838),
                   borderRadius: BorderRadius.circular(30),
                 ),
                 child: TextField(
@@ -97,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     hintText: "Search Book",
                     prefixIcon: Icon(
                       Icons.search,
-                      color: Colors.blueAccent,
+                      color: Colors.grey,
                     ),
                   ),
                 ),
@@ -192,7 +191,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             donatedBy: data.get('donated_by'),
                                             appliedBy: data.get('applied_by'),
                                             title: data.get('title'),
-                                            author: data.get('applied_by'),
+                                            author: data.get('author'),
                                             description:
                                                 data.get('description'),
                                             image: data.get('image'),
@@ -212,16 +211,15 @@ class _HomeScreenState extends State<HomeScreen> {
           : Column(
               children: [
                 Expanded(
-                  child: ListView.builder(
-                      itemCount: _results.length,
-                      itemBuilder: (context, index) {
-                        final key = _results.keys.elementAt(index);
-                        final data = _results[key];
-
-                        return Card(
-                          elevation: 1,
-                          margin: const EdgeInsets.symmetric(vertical: 2),
-                          child: ListTile(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    child: ListView.builder(
+                        itemCount: _results.length,
+                        itemBuilder: (context, index) {
+                          final key = _results.keys.elementAt(index);
+                          final data = _results[key];
+                  
+                          return ListTile(
                             title: Text(data['title']),
                             subtitle: Text(data['author']),
                             onTap: () => Navigator.push(
@@ -232,33 +230,38 @@ class _HomeScreenState extends State<HomeScreen> {
                                           donatedBy: data['donated_by'],
                                           appliedBy: data['applied_by'],
                                           title: data['title'],
-                                          author: data['applied_by'],
+                                          author: data['author'],
                                           description: data['description'],
                                           image: data['image'],
                                           condition: data['condition'],
                                           location:
                                               '${data['city']}, ${data['state']}',
                                         ))),
-                          ),
-                        );
-                      }),
+                          );
+                        }),
+                  ),
                 )
               ],
             ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: ElevatedButton(
-        onPressed: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const DonateScreen(),
-            )),
-        style: ElevatedButton.styleFrom(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-          backgroundColor: Colors.blueAccent,
-        ),
-        child: const Text("DONATE"),
-      ),
+      floatingActionButton: (!searchFocus)
+          ? ElevatedButton(
+              onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const DonateScreen(),
+                  )),
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30)),
+                backgroundColor: const Color(0xff4d4d4d),
+              ),
+              child: const Padding(
+                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                child: Text("DONATE"),
+              ),
+            )
+          : const SizedBox.shrink(),
     );
   }
 }
