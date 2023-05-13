@@ -23,12 +23,14 @@ class LocationAndCondition extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
+                  color: Colors.white70
                 ),
               ),
               Text(
                 location,
                 style: const TextStyle(
                   fontSize: 14,
+                  color: Colors.grey
                 ),
               )
             ],
@@ -43,12 +45,14 @@ class LocationAndCondition extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
+                  color: Colors.white70
                 ),
               ),
               Text(
                 condition,
                 style: const TextStyle(
                   fontSize: 14,
+                  color:Colors.grey
                 ),
               )
             ],
