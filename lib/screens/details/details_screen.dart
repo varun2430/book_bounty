@@ -4,6 +4,10 @@ import 'package:book_bounty/screens/details/components/body.dart';
 
 class DetailsScreen extends StatelessWidget {
   final QueryDocumentSnapshot<Object?> book;
+  // final String id;
+  // final String title;
+  // final String author;
+  // final String image;
   const DetailsScreen({super.key, required this.book});
 
   @override

@@ -14,6 +14,24 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+  Map<String, dynamic> _books = {};
+  Map<String, dynamic> _results = {};
+
+  @override
+  initState() async {
+    final data = await FirebaseFirestore.instance.collection('book').get();
+    Map<String, dynamic> bookData = {};
+    for (var doc in data.docs) {
+      if (doc.get('applied_by').isNotEmpty) {
+        bookData[doc.id] = doc.data();
+      }
+    }
+
+    _books = bookData;
+    _results = bookData;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -37,8 +55,19 @@ class _BodyState extends State<Body> {
                   );
                 }
 
+                Map<String, dynamic> bookData = {};
+                for (var doc in snapshot.data!.docs) {
+                  if (doc.get('applied_by').isNotEmpty) {
+                    bookData[doc.id] = doc.data();
+                  }
+                }
+
+                setState(() {
+                  _books = bookData;
+                });
+
                 return GridView.builder(
-                  itemCount: snapshot.data!.docs.length,
+                  itemCount: _books.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     childAspectRatio: 0.80,
@@ -46,7 +75,8 @@ class _BodyState extends State<Body> {
                     crossAxisSpacing: 15,
                   ),
                   itemBuilder: (BuildContext context, int index) {
-                    final data = snapshot.data!.docs[index];
+                    final key = _books.keys.elementAt(index);
+                    final data = _books[key];
 
                     return BookCard(
                       book: data,

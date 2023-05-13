@@ -45,6 +45,7 @@ dependencies:
   firebase_storage: ^11.1.2
   image_picker: ^0.8.7+4
   csc_picker: ^0.2.7
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_test:
