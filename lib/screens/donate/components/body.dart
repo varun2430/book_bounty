@@ -153,6 +153,7 @@ class _BodyState extends State<Body> {
               child: Text(
                 "Donate Book",
                 style: TextStyle(
+                  color: Colors.white70,
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),
@@ -189,14 +190,16 @@ class _BodyState extends State<Body> {
                       controller: titleController,
                       textInputAction: TextInputAction.next,
                       decoration: const InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white70,
                         border: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.black)),
                         focusedBorder: OutlineInputBorder(
                             borderSide:
-                                BorderSide(color: Color(0xFF66ffee), width: 2)),
+                                BorderSide(color:Colors.indigo, width: 2)),
                         prefixIcon: Icon(
                           Icons.book,
-                          color: Colors.green,
+                          color: Colors.indigo,
                         ),
                         labelText: 'Title',
                         hintText: 'Title',
@@ -209,14 +212,16 @@ class _BodyState extends State<Body> {
                       controller: authorController,
                       textInputAction: TextInputAction.next,
                       decoration: const InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white70,
                         border: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.black)),
                         focusedBorder: OutlineInputBorder(
                             borderSide:
-                                BorderSide(color: Color(0xFF66ffee), width: 2)),
+                                BorderSide(color: Colors.indigo, width: 2)),
                         prefixIcon: Icon(
-                          Icons.book,
-                          color: Colors.green,
+                          Icons.person,
+                          color: Colors.indigo,
                         ),
                         labelText: 'Author',
                         hintText: 'Author',
@@ -229,14 +234,16 @@ class _BodyState extends State<Body> {
                       controller: descriptionController,
                       textInputAction: TextInputAction.next,
                       decoration: const InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white70,
                         border: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.black)),
                         focusedBorder: OutlineInputBorder(
                             borderSide:
-                                BorderSide(color: Color(0xFF66ffee), width: 2)),
+                                BorderSide(color: Colors.indigo, width: 2)),
                         prefixIcon: Icon(
-                          Icons.book,
-                          color: Colors.green,
+                          Icons.description_outlined,
+                          color: Colors.indigo,
                         ),
                         labelText: 'Description',
                         hintText: 'Description',
@@ -255,14 +262,16 @@ class _BodyState extends State<Body> {
                           .toList(),
                       onChanged: (val) {},
                       decoration: const InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white70,
                         border: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.black)),
                         focusedBorder: OutlineInputBorder(
                             borderSide:
-                                BorderSide(color: Color(0xFF66ffee), width: 2)),
+                                BorderSide(color: Colors.indigo, width: 2)),
                         prefixIcon: Icon(
-                          Icons.book,
-                          color: Colors.green,
+                          Icons.category_outlined,
+                          color: Colors.indigo,
                         ),
                         labelText: 'Genre',
                         hintText: 'Genre',
@@ -281,14 +290,16 @@ class _BodyState extends State<Body> {
                           .toList(),
                       onChanged: (val) {},
                       decoration: const InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white70,
                         border: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.black)),
                         focusedBorder: OutlineInputBorder(
                             borderSide:
-                                BorderSide(color: Color(0xFF66ffee), width: 2)),
+                                BorderSide(color: Colors.indigo, width: 2)),
                         prefixIcon: Icon(
                           Icons.book,
-                          color: Colors.green,
+                          color: Colors.indigo,
                         ),
                         labelText: 'Condition',
                         hintText: 'Condition',
@@ -339,6 +350,7 @@ class _BodyState extends State<Body> {
                       const Text(
                         'Select Image',
                         style: TextStyle(
+                          color: Colors.white70,
                             fontWeight: FontWeight.bold, fontSize: 20.0),
                       ),
                       const SizedBox(
@@ -347,7 +359,7 @@ class _BodyState extends State<Body> {
                       ElevatedButton(
                           style: ButtonStyle(
                               backgroundColor:
-                                  MaterialStateProperty.all(Colors.green),
+                                  MaterialStateProperty.all(Color(0xFFa9a9a9)),
                               padding: MaterialStateProperty.all(
                                   const EdgeInsets.all(20)),
                               textStyle: MaterialStateProperty.all(
@@ -367,7 +379,7 @@ class _BodyState extends State<Body> {
                     child: ElevatedButton(
                       onPressed: donate,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.grey[500],
+                        backgroundColor: Colors.blueAccent,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(25),
                         ),

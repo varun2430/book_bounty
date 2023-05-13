@@ -56,7 +56,7 @@ class KnowMoreAndApply extends StatelessWidget {
                 googleSearch(title);
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.grey[500],
+                backgroundColor: Colors.blueAccent,
               ),
               child: const Text("KNOW MORE"),
             ),
@@ -74,7 +74,7 @@ class KnowMoreAndApply extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: apply,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.grey[500],
+                      backgroundColor: Colors.blueAccent,
                     ),
                     child: const Text("APPLY NOW"),
                   ),

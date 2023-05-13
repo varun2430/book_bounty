@@ -74,10 +74,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFB4E4FF),
+      backgroundColor: Colors.grey[900],
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: const Color(0xFF146C94),
+        backgroundColor:Colors.grey[900],
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -121,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: const Icon(
                   Icons.account_circle_outlined,
                   size: 34,
-                  color: Color(0xFFB4E4FF),
+                  color: Colors.blueAccent,
                 ),
               ),
             ),
@@ -255,7 +255,7 @@ class _HomeScreenState extends State<HomeScreen> {
         style: ElevatedButton.styleFrom(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-          backgroundColor: Colors.lightBlueAccent,
+          backgroundColor: Colors.blueAccent,
         ),
         child: const Text("DONATE"),
       ),
