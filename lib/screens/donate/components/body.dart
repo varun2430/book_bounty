@@ -163,27 +163,6 @@ class _BodyState extends State<Body> {
               key: _formKey,
               child: Column(
                 children: [
-                  // Padding(
-                  //   padding: const EdgeInsets.only(bottom: 12),
-                  //   child: TextFormField(
-                  //     controller: isbnController,
-                  //     keyboardType: TextInputType.number,
-                  //     textInputAction: TextInputAction.next,
-                  //     decoration: const InputDecoration(
-                  //       border: OutlineInputBorder(
-                  //           borderSide: BorderSide(color: Colors.black)),
-                  //       focusedBorder: OutlineInputBorder(
-                  //           borderSide:
-                  //               BorderSide(color: Color(0xFF66ffee), width: 2)),
-                  //       prefixIcon: Icon(
-                  //         Icons.book,
-                  //         color: Colors.green,
-                  //       ),
-                  //       labelText: 'ISBN',
-                  //       hintText: 'ISBN',
-                  //     ),
-                  //   ),
-                  // ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 12),
                     child: TextFormField(
@@ -196,10 +175,10 @@ class _BodyState extends State<Body> {
                             borderSide: BorderSide(color: Colors.black)),
                         focusedBorder: OutlineInputBorder(
                             borderSide:
-                                BorderSide(color:Colors.indigo, width: 2)),
+                                BorderSide(color: Colors.indigo, width: 2)),
                         prefixIcon: Icon(
                           Icons.book,
-                          color: Colors.indigo,
+                          color: Colors.blueAccent,
                         ),
                         labelText: 'Title',
                         hintText: 'Title',
@@ -221,7 +200,7 @@ class _BodyState extends State<Body> {
                                 BorderSide(color: Colors.indigo, width: 2)),
                         prefixIcon: Icon(
                           Icons.person,
-                          color: Colors.indigo,
+                          color: Colors.blueAccent,
                         ),
                         labelText: 'Author',
                         hintText: 'Author',
@@ -243,7 +222,7 @@ class _BodyState extends State<Body> {
                                 BorderSide(color: Colors.indigo, width: 2)),
                         prefixIcon: Icon(
                           Icons.description_outlined,
-                          color: Colors.indigo,
+                          color: Colors.blueAccent,
                         ),
                         labelText: 'Description',
                         hintText: 'Description',
@@ -271,7 +250,7 @@ class _BodyState extends State<Body> {
                                 BorderSide(color: Colors.indigo, width: 2)),
                         prefixIcon: Icon(
                           Icons.category_outlined,
-                          color: Colors.indigo,
+                          color: Colors.blueAccent,
                         ),
                         labelText: 'Genre',
                         hintText: 'Genre',
@@ -299,7 +278,7 @@ class _BodyState extends State<Body> {
                                 BorderSide(color: Colors.indigo, width: 2)),
                         prefixIcon: Icon(
                           Icons.book,
-                          color: Colors.indigo,
+                          color: Colors.blueAccent,
                         ),
                         labelText: 'Condition',
                         hintText: 'Condition',
@@ -307,7 +286,7 @@ class _BodyState extends State<Body> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 20),
+                    padding: const EdgeInsets.only(bottom: 10),
                     child: CSCPicker(
                       showStates: true,
                       showCities: true,
@@ -344,32 +323,36 @@ class _BodyState extends State<Body> {
                           : Image.file(
                               File(selectedImagePath),
                               height: 200,
-                              width: 200,
+                              width: 100,
                               fit: BoxFit.fill,
                             ),
                       const Text(
                         'Select Image',
                         style: TextStyle(
-                          color: Colors.white70,
-                            fontWeight: FontWeight.bold, fontSize: 20.0),
+                            color: Colors.white70,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.0),
                       ),
                       const SizedBox(
-                        height: 20.0,
+                        height: 10.0,
                       ),
-                      ElevatedButton(
-                          style: ButtonStyle(
-                              backgroundColor:
-                                  MaterialStateProperty.all(Color(0xFFa9a9a9)),
-                              padding: MaterialStateProperty.all(
-                                  const EdgeInsets.all(20)),
-                              textStyle: MaterialStateProperty.all(
-                                  const TextStyle(
-                                      fontSize: 14, color: Colors.white))),
-                          onPressed: () async {
-                            selectImage();
-                            setState(() {});
-                          },
-                          child: const Text('Select')),
+                      SizedBox(
+                        height: 45,
+                        child: ElevatedButton(
+                            style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(
+                                    Colors.blueAccent),
+                                padding: MaterialStateProperty.all(
+                                    const EdgeInsets.all(15)),
+                                textStyle: MaterialStateProperty.all(
+                                    const TextStyle(
+                                        fontSize: 14, color: Colors.white))),
+                            onPressed: () async {
+                              selectImage();
+                              setState(() {});
+                            },
+                            child: const Text('Select')),
+                      ),
                       const SizedBox(height: 10),
                     ],
                   ),
