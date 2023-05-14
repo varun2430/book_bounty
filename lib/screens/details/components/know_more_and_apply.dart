@@ -63,7 +63,7 @@ class KnowMoreAndApply extends StatelessWidget {
           ),
         ),
         ((donatedBy != FirebaseAuth.instance.currentUser!.uid) &&
-                (appliedBy != FirebaseAuth.instance.currentUser!.email))
+                (appliedBy == ""))
             ? Expanded(
                 child: Padding(
                   padding: const EdgeInsets.only(

@@ -14,10 +14,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final imgUrl = [
-    'https://wallpapers.net/web/wallpapers/dark-forest-passage-hd-wallpaper/thumbnail/lg.jpg',
-    'https://c4.wallpaperflare.com/wallpaper/288/993/204/dark-forest-hd-wallpaper-preview.jpg',
-    'https://c4.wallpaperflare.com/wallpaper/127/202/462/green-dark-jungle-wallpaper-thumb.jpg'
+  final imgPath = [
+    'assets/images/slider_1.jpg',
+    'assets/images/slider_2.jpg',
+    'assets/images/slider_3.jpg',
   ];
   Map<String, dynamic> _books = {};
   Map<String, dynamic> _results = {};
@@ -102,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            const SizedBox(width: 4),
+            const SizedBox(width: 10),
             InkWell(
               onTap: () => Navigator.push(
                   context,
@@ -110,18 +110,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     builder: (context) => const ProfileScreen(),
                   )),
               borderRadius: BorderRadius.circular(50),
-              child: Container(
-                width: 45,
-                height: 45,
-                decoration: const BoxDecoration(
-                  color: Colors.transparent,
-                  shape: BoxShape.circle,
-                ),
-                child: const Icon(
-                  Icons.account_circle_outlined,
-                  size: 34,
-                  color: Colors.blueAccent,
-                ),
+              child: const Icon(
+                Icons.account_circle_outlined,
+                size: 36,
+                color: Colors.blueAccent,
               ),
             ),
           ],
@@ -132,18 +124,24 @@ class _HomeScreenState extends State<HomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 30),
+                  padding: const EdgeInsets.only(
+                    left: 0,
+                    right: 0,
+                    top: 10,
+                    bottom: 20,
+                  ),
                   child: CarouselSlider.builder(
-                      itemCount: imgUrl.length,
+                      itemCount: imgPath.length,
                       options: CarouselOptions(
-                        height: 200,
+                        height: 150,
+                        viewportFraction: 0.7,
                         autoPlay: true,
                       ),
                       itemBuilder: (context, index, realIndex) {
                         return Container(
                           margin: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Image.network(
-                            imgUrl[index],
+                          child: Image.asset(
+                            imgPath[index],
                             fit: BoxFit.cover,
                           ),
                         );
@@ -218,10 +216,20 @@ class _HomeScreenState extends State<HomeScreen> {
                         itemBuilder: (context, index) {
                           final key = _results.keys.elementAt(index);
                           final data = _results[key];
-                  
+
                           return ListTile(
-                            title: Text(data['title']),
-                            subtitle: Text(data['author']),
+                            title: Text(
+                              data['title'],
+                              style: const TextStyle(
+                                color: Colors.white70,
+                              ),
+                            ),
+                            subtitle: Text(
+                              data['author'],
+                              style: const TextStyle(
+                                color: Colors.white38,
+                              ),
+                            ),
                             onTap: () => Navigator.push(
                                 context,
                                 MaterialPageRoute(

@@ -7,7 +7,6 @@ class DonateScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[900],
       appBar: buildAppBar(context),
       body: const Body(),
     );
@@ -19,7 +18,7 @@ class DonateScreen extends StatelessWidget {
       elevation: 0,
       leading: IconButton(
         icon: const Icon(Icons.arrow_back),
-        color: Colors.blueAccent,
+        color: Colors.grey,
         onPressed: () => Navigator.pop(context),
       ),
     );

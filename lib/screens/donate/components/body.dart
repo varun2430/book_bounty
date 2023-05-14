@@ -1,12 +1,12 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_picker/image_picker.dart';
-import 'dart:io';
+import 'package:csc_picker/csc_picker.dart';
 import 'package:book_bounty/main.dart';
 import 'package:book_bounty/utils.dart';
-import 'package:csc_picker/csc_picker.dart';
 
 class Body extends StatefulWidget {
   const Body({super.key});
@@ -66,7 +66,6 @@ class _BodyState extends State<Body> {
   String selectedImagePath = '';
   String? stateValue = "", cityValue = "", countryValue = "";
   String? selectedCondition = '', selectedGenre = '';
-  // final isbnController = TextEditingController();
   final titleController = TextEditingController();
   final authorController = TextEditingController();
   final descriptionController = TextEditingController();
@@ -74,24 +73,12 @@ class _BodyState extends State<Body> {
 
   @override
   void dispose() {
-    // isbnController.dispose();
     titleController.dispose();
     authorController.dispose();
     descriptionController.dispose();
     imageController.dispose();
 
     super.dispose();
-  }
-
-  getPrefixList(String str) {
-    str = str.toLowerCase();
-    List<String> prefixList = [];
-    String tmp = "";
-    for (int i = 0; i < str.length; i++) {
-      tmp = tmp + str[i];
-      prefixList.add(tmp);
-    }
-    return prefixList;
   }
 
   Future<void> donate() async {
@@ -115,9 +102,7 @@ class _BodyState extends State<Body> {
     final myCollectionRef = FirebaseFirestore.instance.collection('book');
 
     final myFields = {
-      // 'isbn': isbnController.text.trim(),
       'title': titleController.text.trim(),
-      'titlePrefix': getPrefixList(titleController.text.trim()),
       'author': authorController.text.trim(),
       'genre': selectedGenre,
       'description': descriptionController.text.trim(),
@@ -144,9 +129,10 @@ class _BodyState extends State<Body> {
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 20,
-          vertical: 12,
+          vertical: 8,
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Padding(
               padding: EdgeInsets.only(bottom: 22),
@@ -170,18 +156,16 @@ class _BodyState extends State<Body> {
                       textInputAction: TextInputAction.next,
                       decoration: const InputDecoration(
                         filled: true,
-                        fillColor: Colors.white70,
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black)),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.indigo, width: 2)),
+                        fillColor: Color(0xff383838),
+                        border: InputBorder.none,
                         prefixIcon: Icon(
                           Icons.book,
-                          color: Colors.blueAccent,
+                          color: Colors.blueGrey,
                         ),
-                        labelText: 'Title',
+                        // labelText: 'Title',
                         hintText: 'Title',
+                        // labelStyle: TextStyle(color: Colors.white70),
+                        hintStyle: TextStyle(color: Colors.white70),
                       ),
                     ),
                   ),
@@ -192,18 +176,15 @@ class _BodyState extends State<Body> {
                       textInputAction: TextInputAction.next,
                       decoration: const InputDecoration(
                         filled: true,
-                        fillColor: Colors.white70,
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black)),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.indigo, width: 2)),
+                        fillColor: Color(0xff383838),
+                        border: InputBorder.none,
                         prefixIcon: Icon(
                           Icons.person,
-                          color: Colors.blueAccent,
+                          color: Colors.blueGrey,
                         ),
-                        labelText: 'Author',
+                        // labelText: 'Author',
                         hintText: 'Author',
+                        hintStyle: TextStyle(color: Colors.white70),
                       ),
                     ),
                   ),
@@ -214,18 +195,15 @@ class _BodyState extends State<Body> {
                       textInputAction: TextInputAction.next,
                       decoration: const InputDecoration(
                         filled: true,
-                        fillColor: Colors.white70,
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black)),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.indigo, width: 2)),
+                        fillColor: Color(0xff383838),
+                        border: InputBorder.none,
                         prefixIcon: Icon(
                           Icons.description_outlined,
-                          color: Colors.blueAccent,
+                          color: Colors.blueGrey,
                         ),
-                        labelText: 'Description',
+                        // labelText: 'Description',
                         hintText: 'Description',
+                        hintStyle: TextStyle(color: Colors.white70),
                       ),
                     ),
                   ),
@@ -241,20 +219,18 @@ class _BodyState extends State<Body> {
                           .toList(),
                       onChanged: (val) {},
                       decoration: const InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white70,
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black)),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.indigo, width: 2)),
-                        prefixIcon: Icon(
-                          Icons.category_outlined,
-                          color: Colors.blueAccent,
-                        ),
-                        labelText: 'Genre',
-                        hintText: 'Genre',
-                      ),
+                          filled: true,
+                          fillColor: Color(0xff383838),
+                          border: InputBorder.none,
+                          prefixIcon: Icon(
+                            Icons.category_outlined,
+                            color: Colors.blueGrey,
+                          ),
+                          labelText: 'Genre',
+                          labelStyle: TextStyle(color: Colors.white70)
+                          // hintText: 'Genre',
+                          // hintStyle: TextStyle(color: Colors.white70),
+                          ),
                     ),
                   ),
                   Padding(
@@ -269,100 +245,77 @@ class _BodyState extends State<Body> {
                           .toList(),
                       onChanged: (val) {},
                       decoration: const InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white70,
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black)),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.indigo, width: 2)),
-                        prefixIcon: Icon(
-                          Icons.book,
-                          color: Colors.blueAccent,
-                        ),
-                        labelText: 'Condition',
-                        hintText: 'Condition',
-                      ),
+                          filled: true,
+                          fillColor: Color(0xff383838),
+                          border: InputBorder.none,
+                          prefixIcon: Icon(
+                            Icons.book,
+                            color: Colors.blueGrey,
+                          ),
+                          labelText: 'Condition',
+                          labelStyle: TextStyle(color: Colors.white70)
+                          // hintText: 'Condition',
+                          // hintStyle: TextStyle(color: Colors.white70)
+                          ),
                     ),
+                  ),
+                  CSCPicker(
+                    showStates: true,
+                    showCities: true,
+                    defaultCountry: CscCountry.India,
+                    disableCountry: true,
+                    selectedItemStyle: const TextStyle(
+                      color: Colors.white70,
+                    ),
+                    dropdownDecoration: const BoxDecoration(
+                      color: Color(0xff383838),
+                    ),
+                    disabledDropdownDecoration: const BoxDecoration(
+                      color: Color(0xff383838),
+                    ),
+                    onCountryChanged: (value) {
+                      setState(() {
+                        countryValue = value;
+                      });
+                    },
+                    onStateChanged: (value) {
+                      setState(() {
+                        stateValue = value;
+                      });
+                    },
+                    onCityChanged: (value) {
+                      setState(() {
+                        cityValue = value;
+                      });
+                    },
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 10),
-                    child: CSCPicker(
-                      showStates: true,
-                      showCities: true,
-                      defaultCountry: CscCountry.India,
-                      disableCountry: true,
-                      onCountryChanged: (value) {
-                        setState(() {
-                          ///store value in country variable
-                          countryValue = value;
-                        });
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: InkWell(
+                      onTap: () async {
+                        selectImage();
+                        setState(() {});
                       },
-                      onStateChanged: (value) {
-                        setState(() {
-                          stateValue = value;
-                        });
-                      },
-                      onCityChanged: (value) {
-                        setState(() {
-                          cityValue = value;
-                        });
-                      },
-                    ),
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      selectedImagePath == ''
+                      child: (selectedImagePath == '')
                           ? Image.asset(
                               'assets/images/image_placeholder.png',
-                              height: 200,
-                              width: 200,
-                              fit: BoxFit.fill,
+                              height: 250,
+                              fit: BoxFit.cover,
                             )
                           : Image.file(
                               File(selectedImagePath),
-                              height: 200,
-                              width: 100,
-                              fit: BoxFit.fill,
+                              height: 250,
+                              fit: BoxFit.cover,
                             ),
-                      const Text(
-                        'Select Image',
-                        style: TextStyle(
-                            color: Colors.white70,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20.0),
-                      ),
-                      const SizedBox(
-                        height: 10.0,
-                      ),
-                      SizedBox(
-                        height: 45,
-                        child: ElevatedButton(
-                            style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(
-                                    Colors.blueAccent),
-                                padding: MaterialStateProperty.all(
-                                    const EdgeInsets.all(15)),
-                                textStyle: MaterialStateProperty.all(
-                                    const TextStyle(
-                                        fontSize: 14, color: Colors.white))),
-                            onPressed: () async {
-                              selectImage();
-                              setState(() {});
-                            },
-                            child: const Text('Select')),
-                      ),
-                      const SizedBox(height: 10),
-                    ],
+                    ),
                   ),
                   SizedBox(
-                    height: 50,
+                    height: 40,
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: donate,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blueAccent,
+                        backgroundColor: Colors.blueGrey,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(25),
                         ),
@@ -385,7 +338,7 @@ class _BodyState extends State<Body> {
         builder: (BuildContext context) {
           return Dialog(
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0)), //this right here
+                borderRadius: BorderRadius.circular(20.0)),
             child: SizedBox(
               height: 150,
               child: Padding(

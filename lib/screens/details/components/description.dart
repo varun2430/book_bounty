@@ -17,6 +17,7 @@ class Description extends StatelessWidget {
       ),
       child: Text(
         bookDesc,
+        textAlign: TextAlign.justify,
         style: const TextStyle(
           fontSize: 14,
           color: Colors.white70,

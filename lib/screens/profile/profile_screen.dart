@@ -6,24 +6,9 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width,
-      alignment: Alignment.center,
-      decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [
-              Color(0xFF1c92d2),
-              Color(0xFFf2fcfe),
-            ],
-          )),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: buildAppBar(context),
-        body: const Body(),
-      ),
+    return Scaffold(
+      appBar: buildAppBar(context),
+      body: const Body(),
     );
   }
 
@@ -33,7 +18,7 @@ class ProfileScreen extends StatelessWidget {
       elevation: 0,
       leading: IconButton(
         icon: const Icon(Icons.arrow_back),
-        color: Colors.black,
+        color: Colors.grey,
         onPressed: () => Navigator.pop(context),
       ),
     );
