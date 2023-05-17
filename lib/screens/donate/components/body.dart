@@ -69,14 +69,12 @@ class _BodyState extends State<Body> {
   final titleController = TextEditingController();
   final authorController = TextEditingController();
   final descriptionController = TextEditingController();
-  final imageController = TextEditingController();
 
   @override
   void dispose() {
     titleController.dispose();
     authorController.dispose();
     descriptionController.dispose();
-    imageController.dispose();
 
     super.dispose();
   }
@@ -108,8 +106,8 @@ class _BodyState extends State<Body> {
       'description': descriptionController.text.trim(),
       'image': imageURL,
       'condition': selectedCondition,
-      'city': '$cityValue',
-      'state': '$stateValue',
+      'city': cityValue,
+      'state': stateValue,
       'donated_by': FirebaseAuth.instance.currentUser!.uid,
       'applied_by': '',
     };
@@ -162,9 +160,7 @@ class _BodyState extends State<Body> {
                           Icons.book,
                           color: Colors.blueGrey,
                         ),
-                        // labelText: 'Title',
                         hintText: 'Title',
-                        // labelStyle: TextStyle(color: Colors.white70),
                         hintStyle: TextStyle(color: Colors.white70),
                       ),
                     ),
@@ -182,7 +178,6 @@ class _BodyState extends State<Body> {
                           Icons.person,
                           color: Colors.blueGrey,
                         ),
-                        // labelText: 'Author',
                         hintText: 'Author',
                         hintStyle: TextStyle(color: Colors.white70),
                       ),
@@ -201,7 +196,6 @@ class _BodyState extends State<Body> {
                           Icons.description_outlined,
                           color: Colors.blueGrey,
                         ),
-                        // labelText: 'Description',
                         hintText: 'Description',
                         hintStyle: TextStyle(color: Colors.white70),
                       ),
@@ -227,10 +221,7 @@ class _BodyState extends State<Body> {
                             color: Colors.blueGrey,
                           ),
                           labelText: 'Genre',
-                          labelStyle: TextStyle(color: Colors.white70)
-                          // hintText: 'Genre',
-                          // hintStyle: TextStyle(color: Colors.white70),
-                          ),
+                          labelStyle: TextStyle(color: Colors.white70)),
                     ),
                   ),
                   Padding(
@@ -253,10 +244,7 @@ class _BodyState extends State<Body> {
                             color: Colors.blueGrey,
                           ),
                           labelText: 'Condition',
-                          labelStyle: TextStyle(color: Colors.white70)
-                          // hintText: 'Condition',
-                          // hintStyle: TextStyle(color: Colors.white70)
-                          ),
+                          labelStyle: TextStyle(color: Colors.white70)),
                     ),
                   ),
                   CSCPicker(
@@ -313,7 +301,18 @@ class _BodyState extends State<Body> {
                     height: 40,
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: donate,
+                      onPressed: () {
+                        if (titleController.text.trim() != '' &&
+                            authorController.text.trim() != '' &&
+                            descriptionController.text.trim() != '' &&
+                            stateValue != '' &&
+                            cityValue != '' &&
+                            selectedImagePath != '') {
+                          donate();
+                        } else {
+                          Utils.showSnackBar("Please fill out all the fields");
+                        }
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.blueGrey,
                         shape: RoundedRectangleBorder(
@@ -361,10 +360,7 @@ class _BodyState extends State<Body> {
                               Navigator.pop(context);
                               setState(() {});
                             } else {
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(const SnackBar(
-                                content: Text("No Image Selected !"),
-                              ));
+                              Utils.showSnackBar("No Image Selected !");
                             }
                           },
                           child: Card(
@@ -392,10 +388,7 @@ class _BodyState extends State<Body> {
                               Navigator.pop(context);
                               setState(() {});
                             } else {
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(const SnackBar(
-                                content: Text("No Image Captured !"),
-                              ));
+                              Utils.showSnackBar("No Image Captured !");
                             }
                           },
                           child: Card(

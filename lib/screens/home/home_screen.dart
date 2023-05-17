@@ -211,42 +211,52 @@ class _HomeScreenState extends State<HomeScreen> {
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 12),
-                    child: ListView.builder(
-                        itemCount: _results.length,
-                        itemBuilder: (context, index) {
-                          final key = _results.keys.elementAt(index);
-                          final data = _results[key];
+                    child: (_results.isNotEmpty)
+                        ? ListView.builder(
+                            itemCount: _results.length,
+                            itemBuilder: (context, index) {
+                              final key = _results.keys.elementAt(index);
+                              final data = _results[key];
 
-                          return ListTile(
-                            title: Text(
-                              data['title'],
-                              style: const TextStyle(
+                              return ListTile(
+                                title: Text(
+                                  data['title'],
+                                  style: const TextStyle(
+                                    color: Colors.white70,
+                                  ),
+                                ),
+                                subtitle: Text(
+                                  data['author'],
+                                  style: const TextStyle(
+                                    color: Colors.white38,
+                                  ),
+                                ),
+                                onTap: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => DetailsScreen(
+                                              id: key,
+                                              donatedBy: data['donated_by'],
+                                              appliedBy: data['applied_by'],
+                                              title: data['title'],
+                                              author: data['author'],
+                                              description: data['description'],
+                                              image: data['image'],
+                                              condition: data['condition'],
+                                              location:
+                                                  '${data['city']}, ${data['state']}',
+                                            ))),
+                              );
+                            })
+                        : const Center(
+                            child: Text(
+                              "No books found!",
+                              style: TextStyle(
                                 color: Colors.white70,
+                                fontSize: 16,
                               ),
                             ),
-                            subtitle: Text(
-                              data['author'],
-                              style: const TextStyle(
-                                color: Colors.white38,
-                              ),
-                            ),
-                            onTap: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => DetailsScreen(
-                                          id: key,
-                                          donatedBy: data['donated_by'],
-                                          appliedBy: data['applied_by'],
-                                          title: data['title'],
-                                          author: data['author'],
-                                          description: data['description'],
-                                          image: data['image'],
-                                          condition: data['condition'],
-                                          location:
-                                              '${data['city']}, ${data['state']}',
-                                        ))),
-                          );
-                        }),
+                          ),
                   ),
                 )
               ],
