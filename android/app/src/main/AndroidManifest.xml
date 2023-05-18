@@ -24,7 +24,7 @@
     </queries>
     
    <application
-        android:label="book_bounty"
+        android:label="Book Bounty"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
