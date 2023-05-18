@@ -60,8 +60,8 @@ class _LogInState extends State<LogIn> {
         begin: Alignment.topRight,
         end: Alignment.bottomLeft,
         colors: [
-          Colors.blue,
-          Colors.yellow,
+          Colors.indigo,
+          Colors.lightBlueAccent,
         ],
       )),
       child: Scaffold(
@@ -84,7 +84,7 @@ class _LogInState extends State<LogIn> {
                     "Login",
                     style: TextStyle(
                       fontStyle: FontStyle.italic,
-                      color: Colors.lightBlue,
+                      color: Colors.indigo,
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),
@@ -103,7 +103,7 @@ class _LogInState extends State<LogIn> {
                           decoration: InputDecoration(
                             prefixIcon: const Icon(
                               Icons.email,
-                              color: Colors.lightBlueAccent,
+                              color: Colors.indigo,
                             ),
                             labelText: 'Email',
                             border: OutlineInputBorder(
@@ -121,7 +121,7 @@ class _LogInState extends State<LogIn> {
                           decoration: InputDecoration(
                             prefixIcon: const Icon(
                               Icons.key,
-                              color: Colors.lightBlueAccent,
+                              color: Colors.indigo,
                             ),
                             labelText: 'Password',
                             border: OutlineInputBorder(
@@ -136,7 +136,7 @@ class _LogInState extends State<LogIn> {
                         child: ElevatedButton.icon(
                           onPressed: signIn,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.lightBlueAccent,
+                            backgroundColor: Colors.indigo,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(25),
                             ),
@@ -161,7 +161,7 @@ class _LogInState extends State<LogIn> {
                                 ..onTap = widget.onClickedSignUp,
                               text: 'Sign Up',
                               style: const TextStyle(
-                                color: Colors.blue,
+                                color: Colors.indigo,
                               ),
                             )
                           ],
