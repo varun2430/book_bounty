@@ -1,16 +1,3 @@
 # book_bounty
 
-A new C2C Book Donation App Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Book Bounty is a user-friendly app that provides a platform for people to donate books, while also enabling those who are looking for books to request them. The app is a great way to foster a sense of community by bringing together individuals who share a passion for reading and who want to help others access the knowledge and enjoyment that books can provide.
